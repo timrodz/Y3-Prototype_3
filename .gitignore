@@ -33,3 +33,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# XboxCtrlInput DLLs
+!XInputDotNetPure.dll
+!XInputInterface.dll
