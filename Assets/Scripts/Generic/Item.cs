@@ -1,5 +1,6 @@
 ﻿public enum Item
 {
 	None,
-	Berry
+	Berry,
+    Wood
 }
