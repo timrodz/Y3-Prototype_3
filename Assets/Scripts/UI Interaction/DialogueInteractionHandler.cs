@@ -11,15 +11,15 @@ using UnityEditor;
 
 public class DialogueInteractionHandler : MonoBehaviour
 {
-	[Header("World canvas transparency group")]
-    [SerializeField] private CanvasGroup transparency;
-	// [SerializeField] private TMPro.TextMeshProUGUI textField;
-	
-	[Space] [Header("Interactable field")]
+    [Header("Variables")]
     [SerializeField] private bool m_IsInteractable;
+    [SerializeField] private NPC m_NPCInfo;
+
+    [Header("Visual Fields")]
+    [SerializeField] private CanvasGroup transparency;
+    [SerializeField] private TMPro.TextMeshProUGUI nameField;
     [SerializeField] private Image m_InteractableImage;
     private Vector3 m_InteractableImageScale;
-	// [SerializeField] private string name
 
     private bool m_CanInteract;
 
@@ -29,15 +29,31 @@ public class DialogueInteractionHandler : MonoBehaviour
     void Awake()
     {
         transparency.alpha = 0;
-		LoadImageButton();
+        m_InteractableImageScale = m_InteractableImage.rectTransform.localScale;
+    }
+    
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        Setup();
+    }
+    
+    private void Setup()
+    {
+        nameField.text = m_NPCInfo.GetName();
     }
 
     private void LoadImageButton()
     {
         var sprite = Resources.Load<Sprite>("UI/Buttons/Interact_Button");
-		Debug.Log(sprite);
-		m_InteractableImage.sprite = sprite;
-        m_InteractableImageScale = m_InteractableImage.rectTransform.localScale;
+        if (sprite)
+        {
+            m_InteractableImage.sprite = sprite;
+        }
+
     }
 
     /// <summary>
@@ -74,6 +90,7 @@ public class DialogueInteractionHandler : MonoBehaviour
 
         if (m_IsInteractable)
         {
+            LoadImageButton();
             m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale * 1.35f, 0.4f).SetLoops(-1, LoopType.Yoyo);
         }
     }
@@ -91,6 +108,21 @@ public class DialogueInteractionHandler : MonoBehaviour
         {
             m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale, 0);
         }
+    }
+    
+    public bool IsInteractable()
+    {
+        return m_IsInteractable;
+    }
+    
+    public bool CanInteract()
+    {
+        return m_CanInteract;
+    }
+    
+    public NPC GetNPCInformation()
+    {
+        return m_NPCInfo;
     }
 
 } // DialogueInteractionHandler

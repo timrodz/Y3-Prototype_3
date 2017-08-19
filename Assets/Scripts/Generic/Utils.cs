@@ -8,6 +8,7 @@ using UnityEngine;
 /// Multi-purpose utilities
 /// </summary>
 public class Utils : MonoBehaviourSingletonPersistent<Utils>
+// public static class Utils
 {
 
     /// <summary>
@@ -24,8 +25,21 @@ public class Utils : MonoBehaviourSingletonPersistent<Utils>
 
         Debug.Log(s);
     }
-    
-    
+
+    public static Color ChangeOpacity(Color c, float alpha)
+    {
+        if (alpha >= 1)
+        {
+            alpha = 1;
+        }
+        else if (alpha < 0)
+        {
+            alpha = 0;
+        }
+        
+        return (new Color(c.r, c.g, c.b, alpha));
+    }
+
     public static void FadeCanvasGroupIn(CanvasGroup cg, float fadeDuration)
     {
         cg.DOFade(1, fadeDuration);

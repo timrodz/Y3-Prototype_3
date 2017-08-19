@@ -5,7 +5,6 @@ using UnityEngine.Events; // UnityEvents
 
 /// <summary>
 /// Manages event handling through UnityEvents
-/// TODO: Change event names from string to enum
 /// 
 /// Author: Juan Rodriguez
 /// Date: 18/08/2017
@@ -28,7 +27,7 @@ public class EventManager : MonoBehaviour
 				}
 				else
 				{
-					eventManager.Init();
+					eventManager.Initialize();
 				}
 			}
 			
@@ -49,10 +48,10 @@ public class EventManager : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
-		Init();
+		Initialize();
 	}
 	
-	private void Init()
+	private void Initialize()
 	{
 		if (null == m_EventDictionary)
 		{
@@ -108,21 +107,37 @@ public class EventManager : MonoBehaviour
 	/// <summary>
 	/// Triggers an event
 	/// </summary>
-	/// <param name="_event"></param>
-	public static void Invoke(CustomEvent _event, bool shouldRegisterSender)
+	/// <param name="_event"> The event type</param>
+	/// <param name="_shouldRegisterSender"></param>
+	public static void Invoke(CustomEvent _event, bool _shouldRegisterSender)
 	{
 		UnityEvent thisEvent = null;
 		
 		if (Instance.m_EventDictionary.TryGetValue(_event.GetName(), out thisEvent))
 		{
-			if (shouldRegisterSender)
+			if (_shouldRegisterSender)
 			{
 				Instance.m_RegisteredSender = _event.GetSender();
 				Debug.Log("Sender set to " + Instance.m_RegisteredSender);
 			}
 			
-			thisEvent.Invoke();
 			Debug.Log(_event.GetName() + " Invoked");
+			thisEvent.Invoke();
+		}
+	}
+	
+	/// <summary>
+	/// Triggers an event
+	/// </summary>
+	/// <param name="_event"> The event type</param>
+	public static void Invoke(CustomEvent _event)
+	{
+		UnityEvent thisEvent = null;
+		
+		if (Instance.m_EventDictionary.TryGetValue(_event.GetName(), out thisEvent))
+		{
+			Debug.Log(_event.GetName() + " Invoked");
+			thisEvent.Invoke();
 		}
 	}
 	
@@ -143,8 +158,10 @@ public class EventManager : MonoBehaviour
 public enum EventName
 {
     NONE = 0,
-    OnPlayerTriggerEnter,
-    OnPlayerTriggerExit
+    OnPlayerTriggerEnter = 1,
+    OnPlayerTriggerExit = 2,
+	DialogueRequest = 4,
+	DialogueOngoing = 8
 }
 
 // -------------------------------------------------------------------
