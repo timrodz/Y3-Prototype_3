@@ -44,9 +44,6 @@ public class NPCNavAgent : MonoBehaviour {
         //Set a high quality avoidance algorithm
         m_agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
-        //Set agent target destination
-        StartCoroutine("UpdateFollowTarget");
-
     }
     
 
