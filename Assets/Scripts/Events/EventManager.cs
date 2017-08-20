@@ -108,7 +108,7 @@ public class EventManager : MonoBehaviour
 	/// Triggers an event
 	/// </summary>
 	/// <param name="_event"> The event type</param>
-	/// <param name="_shouldRegisterSender"></param>
+	/// <param name="_shouldRegisterSender"> The object that is invoking the event</param>
 	public static void Invoke(CustomEvent _event, bool _shouldRegisterSender)
 	{
 		UnityEvent thisEvent = null;
@@ -129,14 +129,14 @@ public class EventManager : MonoBehaviour
 	/// <summary>
 	/// Triggers an event
 	/// </summary>
-	/// <param name="_event"> The event type</param>
-	public static void Invoke(CustomEvent _event)
+	/// <param name="_event"> The event name</param>
+	public static void Invoke(EventName _event)
 	{
 		UnityEvent thisEvent = null;
 		
-		if (Instance.m_EventDictionary.TryGetValue(_event.GetName(), out thisEvent))
+		if (Instance.m_EventDictionary.TryGetValue(_event, out thisEvent))
 		{
-			Debug.Log(_event.GetName() + " Invoked");
+			Debug.Log(_event + " Invoked");
 			thisEvent.Invoke();
 		}
 	}
@@ -158,10 +158,11 @@ public class EventManager : MonoBehaviour
 public enum EventName
 {
     NONE = 0,
-    OnPlayerTriggerEnter = 1,
-    OnPlayerTriggerExit = 2,
-	DialogueRequest = 4,
-	DialogueOngoing = 8
+    OnPlayerTriggerEnter,
+    OnPlayerTriggerExit,
+	DialogueRequest,
+	DialogueStart,
+	DialogueClose
 }
 
 // -------------------------------------------------------------------

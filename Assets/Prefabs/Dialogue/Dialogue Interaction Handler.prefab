@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 222567381502648170}
   - component: {fileID: 114987091463278774}
   m_Layer: 0
-  m_Name: Toggle Interaction Image
+  m_Name: Interactable Button Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: NPC_Name
+  m_text: Bear
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
@@ -181,10 +181,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114261073251046828}
-    characterCount: 8
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 2
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -255,10 +255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d870c2cac06ca4f05aacf9d2f37b0522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsInteractable: 1
   m_NPCInfo:
     m_Name: Bear
+    m_IsInteracting: 0
+    gameObject: {fileID: 0}
   transparency: {fileID: 225868056021313522}
-  m_IsInteractable: 1
+  nameField: {fileID: 114261073251046828}
   m_InteractableImage: {fileID: 114987091463278774}
 --- !u!114 &114987091463278774
 MonoBehaviour:
@@ -364,11 +367,11 @@ RectTransform:
   m_Father: {fileID: 224486241122189682}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 128, y: 128}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!224 &224851866467445898
 RectTransform:
   m_ObjectHideFlags: 1
@@ -382,10 +385,10 @@ RectTransform:
   m_Father: {fileID: 224486241122189682}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0.74500006, y: 1}
-  m_AnchoredPosition: {x: 102.030624, y: -199.99959}
-  m_SizeDelta: {x: 204.06125, y: 399.99918}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &225868056021313522
 CanvasGroup:

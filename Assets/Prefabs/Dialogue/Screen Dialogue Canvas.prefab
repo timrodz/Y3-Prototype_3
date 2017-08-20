@@ -142,6 +142,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd54f46a639cd4187997de52fa850819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Transparency: {fileID: 225896861659466366}
+  m_NameField: {fileID: 114229853353083200}
+  m_TextField: {fileID: 114613397583113510}
+  m_NextFieldCursor: {fileID: 224717821868937430}
+  m_Sender: {fileID: 0}
+  m_DialogueNPC:
+    m_Name: Default_NPC
+    m_IsInteracting: 0
+    gameObject: {fileID: 0}
+  m_HasDialogueStarted: 0
 --- !u!114 &114084046649653906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,6 +623,6 @@ CanvasGroup:
   m_GameObject: {fileID: 1483549406034212}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

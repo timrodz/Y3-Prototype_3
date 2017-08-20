@@ -16,8 +16,8 @@ public class DialogueInteractionHandler : MonoBehaviour
     [SerializeField] private NPC m_NPCInfo;
 
     [Header("Visual Fields")]
-    [SerializeField] private CanvasGroup transparency;
-    [SerializeField] private TMPro.TextMeshProUGUI nameField;
+    [SerializeField] private CanvasGroup m_Transparency;
+    [SerializeField] private TMPro.TextMeshProUGUI m_NameField;
     [SerializeField] private Image m_InteractableImage;
     private Vector3 m_InteractableImageScale;
 
@@ -28,7 +28,7 @@ public class DialogueInteractionHandler : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        transparency.alpha = 0;
+        m_Transparency.alpha = 0;
         m_InteractableImageScale = m_InteractableImage.rectTransform.localScale;
     }
     
@@ -43,7 +43,7 @@ public class DialogueInteractionHandler : MonoBehaviour
     
     private void Setup()
     {
-        nameField.text = m_NPCInfo.GetName();
+        m_NameField.text = m_NPCInfo.GetName();
     }
 
     private void LoadImageButton()
@@ -61,8 +61,9 @@ public class DialogueInteractionHandler : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        EventManager.StartListening(EventName.OnPlayerTriggerEnter, ShowInteractableImage);
-        EventManager.StartListening(EventName.OnPlayerTriggerExit, HideInteractableImage);
+        EventManager.StartListening(EventName.OnPlayerTriggerEnter, ShowPanel);
+        EventManager.StartListening(EventName.OnPlayerTriggerExit, HidePanel);
+        EventManager.StartListening(EventName.DialogueStart, HidePanelButtonImage);
     }
 
     /// <summary>
@@ -70,43 +71,55 @@ public class DialogueInteractionHandler : MonoBehaviour
     /// </summary>
     void OnDisable()
     {
-        EventManager.StopListening(EventName.OnPlayerTriggerEnter, ShowInteractableImage);
-        EventManager.StopListening(EventName.OnPlayerTriggerExit, HideInteractableImage);
+        EventManager.StopListening(EventName.OnPlayerTriggerEnter, ShowPanel);
+        EventManager.StopListening(EventName.OnPlayerTriggerExit, HidePanel);
+        EventManager.StopListening(EventName.DialogueStart, HidePanelButtonImage);
     }
 
-    private void ShowInteractableImage()
+    private void ShowPanel()
     {
         // If the sender is not the object, there's no need to show our interactability
         if (this.gameObject != EventManager.GetRegisteredSender())
         {
-            HideInteractableImage();
+            HidePanel();
             return;
         }
 
         Debug.Log("Showing " + name);
 
         m_CanInteract = true;
-        transparency.DOFade(1, 0.15f);
+        m_Transparency.DOFade(1, 0.15f);
 
         if (m_IsInteractable)
         {
             LoadImageButton();
+            m_InteractableImage.DOFade(1, 0.25f);
             m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale * 1.35f, 0.4f).SetLoops(-1, LoopType.Yoyo);
         }
     }
 
-    private void HideInteractableImage()
+    private void HidePanel()
     {
-        if (this.gameObject != EventManager.GetRegisteredSender()) return;
+        // if (this.gameObject != EventManager.GetRegisteredSender()) return;
 
         Debug.Log("Hiding " + name);
 
         m_CanInteract = false;
-        transparency.DOFade(0, 0.05f);
+        m_Transparency.DOFade(0, 0.05f);
 
         if (m_IsInteractable)
         {
-            m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale, 0);
+            m_InteractableImage.rectTransform.localScale = m_InteractableImageScale;
+        }
+    }
+    
+    private void HidePanelButtonImage()
+    {
+        Debug.Log("Hiding " + name + " button image");
+
+        if (m_IsInteractable)
+        {
+            m_InteractableImage.DOFade(0, 0.25f);
         }
     }
     

@@ -26,7 +26,7 @@ public class NPC
         return m_Name;
     }
     
-    public void SetGameObject(GameObject _object)
+    public void SetObject(GameObject _object)
     {
         gameObject = _object;
     }

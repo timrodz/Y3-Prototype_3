@@ -8,12 +8,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     public class ThirdPersonUserControl : MonoBehaviour
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
-        private Transform m_Cam;                  // A reference to the main camera in the scenes transform
-        private Vector3 m_CamForward;             // The current forward direction of the camera
+        private Transform m_Cam; // A reference to the main camera in the scenes transform
+        private Vector3 m_CamForward; // The current forward direction of the camera
         private Vector3 m_Move;
-        private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
+        private bool m_Jump; // the world-relative desired move direction, calculated from the camForward and user input.
 
-        
+        private bool m_CanMove = true;
+
         private void Start()
         {
             // get the transform of the main camera
@@ -32,6 +33,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
+        /// <summary>
+        /// This function is called when the object becomes enabled and active.
+        /// </summary>
+        void OnEnable()
+        {
+            EventManager.StartListening(EventName.DialogueStart, PreventMovement);
+            EventManager.StartListening(EventName.DialogueClose, PreventMovement);
+        }
+
+        /// <summary>
+        /// This function is called when the behaviour becomes disabled or inactive.
+        /// </summary>
+        void OnDisable()
+        {
+            EventManager.StopListening(EventName.DialogueStart, PreventMovement);
+            EventManager.StopListening(EventName.DialogueClose, PreventMovement);
+        }
 
         private void Update()
         {
@@ -41,10 +59,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-
         // Fixed update is called in sync with physics
         private void FixedUpdate()
         {
+            if (!m_CanMove) { return; }
+            
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -55,21 +74,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 // calculate camera relative direction to move:
                 m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = v*m_CamForward + h*m_Cam.right;
+                m_Move = v * m_CamForward + h * m_Cam.right;
             }
             else
             {
                 // we use world-relative directions in the case of no main camera
-                m_Move = v*Vector3.forward + h*Vector3.right;
+                m_Move = v * Vector3.forward + h * Vector3.right;
             }
+            
 #if !MOBILE_INPUT
-			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+            // walk speed multiplier
+            if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 #endif
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
+
+        private void AllowMovement()
+        {
+            Debug.Log("Allowing player movement");
+            m_CanMove = true;
+            
+            
+        }
+
+        private void PreventMovement()
+        {
+            Debug.Log("Preventing player movement");
+            m_CanMove = false;
+            m_Move = Vector3.zero;
+            m_Character.Move(Vector3.zero, false, false);
+        }
+
     }
+
 }
