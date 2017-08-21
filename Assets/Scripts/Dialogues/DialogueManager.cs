@@ -17,6 +17,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private CustomEvent m_Event;
 
     [SerializeField] private bool m_HasDialogueStarted;
+    [SerializeField] private bool m_IsProcessingText;
+    [SerializeField] private string m_CurrentTextField;
+
+    Tween t;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -26,6 +30,7 @@ public class DialogueManager : MonoBehaviour
         m_Transparency.alpha = 0;
         m_TextField.text = "";
         m_NextFieldCursor.localScale = Vector3.zero;
+        // m_CurrentTextField = "Howdy there, buddy!\nMy name is Bear.";
     }
 
     /// <summary>
@@ -44,8 +49,34 @@ public class DialogueManager : MonoBehaviour
         EventManager.StopListening(EventName.DialogueRequest, ProcessDialogue);
     }
 
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
+    {
+        if (m_IsProcessingText)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log(">> Pressed E while processing text");
+                StopAllCoroutines();
+                ShowNextFieldCursor(m_CurrentTextField);
+            }
+        }
+    }
+
     private void ProcessDialogue()
     {
+        // Dialogue is currently being shown
+        if (m_IsProcessingText)
+        {
+            Debug.Log(">> Processing text - Can't process dialogue at this time.");
+            return;
+        }
+
+        Debug.Log("==== Processing Dialogue ====");
+        Debug.Log(">> Has dialogue started: " + m_HasDialogueStarted);
+
         // If the dialogue has not started yet
         if (!m_HasDialogueStarted)
         {
@@ -70,7 +101,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        ProcessTextField();
+        ProcessTextField(m_CurrentTextField);
 
     }
 
@@ -78,37 +109,51 @@ public class DialogueManager : MonoBehaviour
     {
         m_NameField.text = m_DialogueNPC.GetName();
 
-        ProcessTextField();
+        ProcessTextField(m_CurrentTextField);
+
         m_Transparency.DOFade(1, 0.5f).SetEase(Ease.OutBack);
 
     }
 
-    private void ProcessTextField()
+    private void ProcessTextField(string text)
     {
-        StartCoroutine(AnimateText(0.4f, 0.3f, 0.02f));
+        m_IsProcessingText = true;
+
+        StartCoroutine(AnimateText(text, 0.5f, 0.3f, 0.02f));
     }
 
     /// <summary>
     /// Animates the text in a typewriter effect
     /// </summary>
+    /// <param name="text"></param>
     /// <param name="initialDelay"></param>
     /// <param name="returnKeyDelay"></param>
     /// <param name="typingSpeed"></param>
     /// <returns></returns>
-    private IEnumerator AnimateText(float initialDelay, float returnKeyDelay, float typingSpeed)
+    private IEnumerator AnimateText(string text, float initialDelay, float returnKeyDelay, float typingSpeed)
     {
         // Hide the cursor
         m_NextFieldCursor.DOScale(Vector3.zero, 0.1f);
-        m_NextFieldCursor.DOLocalMoveY(0, 0f);
-        
-        yield return new WaitForSeconds(initialDelay);
+        m_NextFieldCursor.localPosition = Vector3.zero;
+        t.SetLoops(0);
+        t.Complete();
+        t.Kill();
 
-        string text = "This is a random text field!\nHow are you?";
+        yield return new WaitForSeconds(initialDelay);
+        
+        Debug.Log(">> Text to animate");
+        Debug.Log(m_CurrentTextField);
 
         string finalText = "";
 
         for (int i = 0; i < text.Length; i++)
         {
+            if (!m_IsProcessingText)
+            {
+                Debug.Log(">> Skipped text animation");
+                break;
+            }
+
             if (text[i] == '\n')
             {
                 yield return new WaitForSeconds(returnKeyDelay);
@@ -117,19 +162,33 @@ public class DialogueManager : MonoBehaviour
             m_TextField.text = finalText;
             yield return new WaitForSeconds(typingSpeed);
         }
-        
+
+        Debug.Log(">> Finished animating text - Showing next field cursor");
+        ShowNextFieldCursor(m_CurrentTextField);
+
+    }
+
+    /// <summary>
+    /// Show the next field cursor - Called whenever the text animation finishes
+    /// </summary>
+    private void ShowNextFieldCursor(string currentTextField)
+    {
+        Debug.Log(">> Showing next field cursor");
+
+        m_TextField.text = currentTextField;
+
+        m_NextFieldCursor.localPosition = Vector3.zero;
+
         // Show the cursor once the dialogue has finished
         m_NextFieldCursor.DOScale(Vector3.one, 0.2f).OnComplete(() =>
         {
-            m_NextFieldCursor.DOLocalMoveY(-5, 0.3f).SetLoops(-1, LoopType.Yoyo);
+            m_IsProcessingText = false;
+            t = m_NextFieldCursor.DOLocalMoveY(-5, 0.3f).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo);
         });
-        
     }
 
     private NPC SetupDialogueNPC()
     {
-        Debug.Log("===== ATTEMPTING TO ACQUIRE NPC INFORMATION ====");
-
         m_Sender = EventManager.GetRegisteredSender();
 
         // No sender
@@ -138,6 +197,8 @@ public class DialogueManager : MonoBehaviour
             Debug.Log(">> No sender set");
             return null;
         }
+
+        Debug.Log("===== ATTEMPTING TO ACQUIRE NPC INFORMATION ====");
 
         DialogueInteractionHandler dih = m_Sender.GetComponent<DialogueInteractionHandler>();
 

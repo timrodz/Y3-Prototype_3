@@ -39,6 +39,7 @@ public class EventManager : MonoBehaviour
 	private Dictionary<EventName, UnityEvent> m_EventDictionary;
 	
 	private GameObject m_RegisteredSender;
+	private EventName m_LastEvent;
 	
 	// -------------------------------------------------------------------
 	
@@ -123,6 +124,9 @@ public class EventManager : MonoBehaviour
 			
 			Debug.Log(_event.GetName() + " Invoked");
 			thisEvent.Invoke();
+			
+			// Register this event as the last event
+			Instance.m_LastEvent = _event.GetName();
 		}
 	}
 	
@@ -138,6 +142,9 @@ public class EventManager : MonoBehaviour
 		{
 			Debug.Log(_event + " Invoked");
 			thisEvent.Invoke();
+			
+			// Register this event as the last event
+			Instance.m_LastEvent = _event;
 		}
 	}
 	
@@ -149,6 +156,11 @@ public class EventManager : MonoBehaviour
 	public static GameObject GetRegisteredSender()
 	{
 		return (Instance.m_RegisteredSender);
+	}
+	
+	public static EventName GetLastEvent()
+	{
+		return (Instance.m_LastEvent);
 	}
 
 } // EventManager

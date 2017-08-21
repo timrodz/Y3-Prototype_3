@@ -16,7 +16,6 @@ public class PlayerEventHandler : MonoBehaviour
 #if UNITY_STANDALONE
         if (m_CanInteract && Input.GetKeyDown(KeyCode.E))
         {
-            // m_Event = new CustomEvent(EventName.DialogueRequest);
             EventManager.Invoke(EventName.DialogueRequest);
         }
 #endif

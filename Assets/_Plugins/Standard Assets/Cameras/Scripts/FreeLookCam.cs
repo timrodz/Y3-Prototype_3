@@ -1,7 +1,8 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using DG.Tweening;
+
 
 namespace UnityStandardAssets.Cameras
 {
@@ -28,7 +29,7 @@ namespace UnityStandardAssets.Cameras
         private Vector3 m_PivotEulers;
         private Quaternion m_PivotTargetRot;
         private Quaternion m_TransformTargetRot;
-        
+
         [Header("Dialogue camera")]
         [SerializeField] private Transform m_DialogueMiddlePoint;
         [SerializeField] private Transform m_CameraPivot;
@@ -46,7 +47,7 @@ namespace UnityStandardAssets.Cameras
 
             m_PivotTargetRot = m_Pivot.transform.localRotation;
             m_TransformTargetRot = transform.localRotation;
-            
+
             // Register the pivot's current offset
             m_OriginalCameraPivotOffset = m_CameraPivot.localPosition;
         }
@@ -69,39 +70,51 @@ namespace UnityStandardAssets.Cameras
             EventManager.StartListening(EventName.DialogueStart, CenterCameraInDialogue);
             EventManager.StartListening(EventName.DialogueClose, ReturnCameraBackToTarget);
         }
-        
+
         private void OnDisable()
         {
             EventManager.StopListening(EventName.DialogueStart, CenterCameraInDialogue);
             EventManager.StopListening(EventName.DialogueClose, ReturnCameraBackToTarget);
-            
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        
+
         private void CenterCameraInDialogue()
         {
+            if (null == m_DialogueMiddlePoint)
+            {
+                Debug.LogError("@@@@ Dialogue middle point is not set");
+                return;
+            }
+
+            if (null == m_Pivot)
+            {
+                Debug.LogError("@@@@ Pivot is not set");
+            }
+
             Debug.Log(">> Centering camera in dialogue");
             m_CameraPivot.DOLocalMove(m_CameraPivotOffset, 0.1f);
             // m_CameraPivot.localPosition = m_CameraPivotOffset;
-            
+
             // Set the last target to be the current target (Usually the player)
             m_LastTarget = m_Target;
-            
+
             // Calculate the center between the target and the other dialogue
             Transform sender = EventManager.GetRegisteredSender().transform;
-            
+
             // Set the dialogue middle point position to be the middle between the target and the sender
             m_DialogueMiddlePoint.position = new Vector3(
                 m_Target.position.x + (sender.position.x - m_Target.position.x) / 2,
                 m_Target.position.y + (sender.position.y - m_Target.position.y) / 2,
                 m_Target.position.z + (sender.position.z - m_Target.position.z) / 2
             );
-            
+
             m_Target = m_DialogueMiddlePoint;
-            
+
             Debug.Log(">> Making objects look at each other");
             
+
         }
 
         private void ReturnCameraBackToTarget()
