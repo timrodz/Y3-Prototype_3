@@ -13,7 +13,7 @@ public class DialogueInteractionHandler : MonoBehaviour
 {
     [Header("Variables")]
     [SerializeField] private bool m_IsInteractable;
-    [SerializeField] private NPC m_NPCInfo;
+    private NPC m_NPCInfo;
 
     [Header("Visual Fields")]
     [SerializeField] private CanvasGroup m_Transparency;
@@ -43,6 +43,7 @@ public class DialogueInteractionHandler : MonoBehaviour
     
     private void Setup()
     {
+        m_NPCInfo = GetComponentInParent<NPCHolder>().NPC;
         m_NameField.text = m_NPCInfo.GetName();
     }
 
@@ -133,7 +134,7 @@ public class DialogueInteractionHandler : MonoBehaviour
         return m_CanInteract;
     }
     
-    public NPC GetNPCInformation()
+    public NPC GetNPC()
     {
         return m_NPCInfo;
     }

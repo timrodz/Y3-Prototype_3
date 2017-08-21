@@ -313,6 +313,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 14327770}
     m_Modifications:
+    - target: {fileID: 114982568189140302, guid: 01800c350b8a64c93bb4bb0519ddf7ea,
+        type: 2}
+      propertyPath: m_NPCInfo.dialogue.sentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4310022893251332, guid: 01800c350b8a64c93bb4bb0519ddf7ea, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -354,6 +359,26 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982568189140302, guid: 01800c350b8a64c93bb4bb0519ddf7ea,
+        type: 2}
+      propertyPath: m_IsInteractable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982568189140302, guid: 01800c350b8a64c93bb4bb0519ddf7ea,
+        type: 2}
+      propertyPath: m_NPCInfo.m_IsInteracting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982568189140302, guid: 01800c350b8a64c93bb4bb0519ddf7ea,
+        type: 2}
+      propertyPath: m_NPCInfo.dialogue.sentences.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982568189140302, guid: 01800c350b8a64c93bb4bb0519ddf7ea,
+        type: 2}
+      propertyPath: m_NPCInfo
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01800c350b8a64c93bb4bb0519ddf7ea, type: 2}
@@ -1446,6 +1471,7 @@ GameObject:
   - component: {fileID: 1602723212}
   - component: {fileID: 1602723211}
   - component: {fileID: 1602723210}
+  - component: {fileID: 1602723213}
   m_Layer: 0
   m_Name: Bear - Quest Object
   m_TagString: Untagged
@@ -1508,6 +1534,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602723209}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1602723213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1602723209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc847442f8bc5449690b1c26a8966e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPC:
+    m_Name: Bear
+    m_IsInteracting: 0
+    gameObject: {fileID: 0}
+    m_Dialogue:
+      sentences:
+      - Hey there buddy.
+      - How are you?
+      - 'I need some berries m8
+
+        #dank'
 --- !u!4 &1623513734 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 93e86b57e56570d46814839867bf9a52, type: 2}
@@ -1814,17 +1862,17 @@ Prefab:
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_text
-      value: 
+      value: This is a random text blob.
       objectReference: {fileID: 0}
     - target: {fileID: 114076997497758128, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
@@ -1839,31 +1887,41 @@ Prefab:
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224717821868937430, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
+        type: 2}
+      propertyPath: m_textAlignment
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
+        type: 2}
+      propertyPath: m_isRightToLeft
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

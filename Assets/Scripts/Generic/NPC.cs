@@ -9,6 +9,8 @@ public class NPC
     [SerializeField] private bool m_IsInteracting;
     [SerializeField] private GameObject gameObject;
     
+    [SerializeField] private Dialogue m_Dialogue;
+    
     public NPC()
     {
         m_Name = "Default_NPC";
@@ -44,6 +46,11 @@ public class NPC
     public bool IsInteracting()
     {
         return m_IsInteracting;
+    }
+    
+    public Dialogue GetDialogue()
+    {
+        return m_Dialogue;
     }
 
 }

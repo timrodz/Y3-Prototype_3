@@ -5,20 +5,25 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Variables")]
+    [SerializeField] private bool m_HasDialogueStarted;
+    [SerializeField] private bool m_IsProcessingText;
+
+    [Space]
     [Header("Visual Fields")]
     [SerializeField] private CanvasGroup m_Transparency;
     [SerializeField] private TMPro.TextMeshProUGUI m_NameField;
     [SerializeField] private TMPro.TextMeshProUGUI m_TextField;
     [SerializeField] private RectTransform m_NextFieldCursor;
 
+    [Space]
     [Header("Current Dialogue NPC")]
     [SerializeField] private GameObject m_Sender;
     [SerializeField] private NPC m_DialogueNPC;
     [SerializeField] private CustomEvent m_Event;
 
-    [SerializeField] private bool m_HasDialogueStarted;
-    [SerializeField] private bool m_IsProcessingText;
-    [SerializeField] private string m_CurrentTextField;
+    private string m_CurrentSentence;
+    private Queue<string> m_DialogueQueue = new Queue<string>();
 
     Tween t;
 
@@ -30,7 +35,6 @@ public class DialogueManager : MonoBehaviour
         m_Transparency.alpha = 0;
         m_TextField.text = "";
         m_NextFieldCursor.localScale = Vector3.zero;
-        // m_CurrentTextField = "Howdy there, buddy!\nMy name is Bear.";
     }
 
     /// <summary>
@@ -60,7 +64,7 @@ public class DialogueManager : MonoBehaviour
             {
                 Debug.Log(">> Pressed E while processing text");
                 StopAllCoroutines();
-                ShowNextFieldCursor(m_CurrentTextField);
+                ShowNextFieldCursor(m_CurrentSentence);
             }
         }
     }
@@ -101,7 +105,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        ProcessTextField(m_CurrentTextField);
+        ProcessTextField();
 
     }
 
@@ -109,17 +113,43 @@ public class DialogueManager : MonoBehaviour
     {
         m_NameField.text = m_DialogueNPC.GetName();
 
-        ProcessTextField(m_CurrentTextField);
+        Debug.Log("Starting conversation with: " + m_DialogueNPC.GetName());
+
+        // Populate sentence queue
+        m_DialogueQueue.Clear();
+
+        foreach(string sentence in m_DialogueNPC.GetDialogue().sentences)
+        {
+            m_DialogueQueue.Enqueue(sentence);
+        }
+
+        ProcessTextField();
 
         m_Transparency.DOFade(1, 0.5f).SetEase(Ease.OutBack);
 
     }
 
-    private void ProcessTextField(string text)
+    private void EndDialogue()
+    {
+        m_Transparency.DOFade(0, 0.25f).OnComplete(() =>
+        {
+            m_HasDialogueStarted = false;
+        });
+    }
+
+    private void ProcessTextField()
     {
         m_IsProcessingText = true;
 
-        StartCoroutine(AnimateText(text, 0.5f, 0.3f, 0.02f));
+        if (m_DialogueQueue.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
+
+        m_CurrentSentence = m_DialogueQueue.Dequeue();
+
+        StartCoroutine(AnimateText(m_CurrentSentence, 0.5f, 0.3f, 0.02f));
     }
 
     /// <summary>
@@ -140,9 +170,6 @@ public class DialogueManager : MonoBehaviour
         t.Kill();
 
         yield return new WaitForSeconds(initialDelay);
-        
-        Debug.Log(">> Text to animate");
-        Debug.Log(m_CurrentTextField);
 
         string finalText = "";
 
@@ -158,15 +185,31 @@ public class DialogueManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(returnKeyDelay);
             }
-            finalText += text[i];
+
+            if (text[i] == '\\')
+            {
+                if (text[i + 1] == 'n')
+                {
+                    finalText += "<br>";
+                    i++;
+                    yield return new WaitForSeconds(returnKeyDelay);
+                }
+            }
+            else
+            {
+                finalText += text[i];
+            }
+
             m_TextField.text = finalText;
             yield return new WaitForSeconds(typingSpeed);
         }
 
         Debug.Log(">> Finished animating text - Showing next field cursor");
-        ShowNextFieldCursor(m_CurrentTextField);
+        ShowNextFieldCursor(text);
 
     }
+
+    private void CheckForEscapeCharactersInText() { }
 
     /// <summary>
     /// Show the next field cursor - Called whenever the text animation finishes
@@ -205,7 +248,7 @@ public class DialogueManager : MonoBehaviour
         // Check if the object has an interaction handler
         if (null == dih)
         {
-            Debug.LogWarning(">> Dialogue interaction handler doesn't have an NPC");
+            Debug.LogWarning(">> Dialogue interaction handler doesn't exist");
             return null;
         }
 
@@ -223,7 +266,7 @@ public class DialogueManager : MonoBehaviour
             return null;
         }
 
-        NPC npc = dih.GetNPCInformation();
+        NPC npc = dih.GetNPC();
         npc.SetObject(dih.transform.parent.gameObject);
 
         Debug.Log("===== ACQUIRED NPC INFORMATION ====");
