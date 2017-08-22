@@ -84,11 +84,7 @@ public class DialogueInteractionHandler : MonoBehaviour
         m_CanInteract = true;
         m_Transparency.DOFade(1, 0.35f);
 
-        if (m_IsInteractable)
-        {
-            m_InteractableImage.DOFade(1, 0.25f);
-            ShowPanelButtonImage();
-        }
+        ShowPanelButtonImage();
     }
 
     private void HidePanel()
@@ -111,13 +107,9 @@ public class DialogueInteractionHandler : MonoBehaviour
 
     private void ShowPanelButtonImage()
     {
-        Debug.Log("Showing " + name + " button image");
-
         if (m_IsInteractable)
         {
-            interactableImageTween.SetLoops(0);
-            interactableImageTween.Complete();
-            interactableImageTween.Kill();
+            Debug.Log("Showing " + name + " button image");
             m_InteractableImage.DOFade(1, 0.25f);
             interactableImageTween = m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale * 1.35f, 0.4f).SetLoops(-1, LoopType.Yoyo);
         }

@@ -11,27 +11,27 @@ using UnityEngine.Events; // UnityEvents
 /// </summary>
 public class EventManager : MonoBehaviour
 {	
-	private static EventManager eventManager;
+	private static EventManager _instance;
 	
 	public static EventManager Instance
 	{
 		get
 		{
-			if (!eventManager)
+			if (!_instance)
 			{
-				eventManager = FindObjectOfType (typeof(EventManager)) as EventManager;
+				_instance = FindObjectOfType (typeof(EventManager)) as EventManager;
 				
-				if (!eventManager)
+				if (!_instance)
 				{
 					Debug.LogError("There needs to be one active EventManager script on a GameObject in your scene.");
 				}
 				else
 				{
-					eventManager.Initialize();
+					_instance.Initialize();
 				}
 			}
 			
-			return eventManager;	
+			return _instance;	
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class EventManager : MonoBehaviour
 	/// <param name="listener"></param>
 	public static void StopListening(EventName eventName, UnityAction listener)
 	{
-		if (null == eventManager) return;
+		if (null == _instance) return;
 		
 		UnityEvent thisEvent = null;
 		

@@ -181,6 +181,8 @@ public class DialogueManager : MonoBehaviour
             EventManager.Invoke(EventName.QuestStart);
 
             QuestManager.AddQuest(quest);
+            
+            QuestManager.SetCurrentQuest(quest);
         }
     }
 
