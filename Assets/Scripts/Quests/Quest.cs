@@ -1,0 +1,67 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public enum QuestState
+{
+	NotStarted,
+	Started,
+	Failed,
+	Complete
+}
+
+[System.Serializable]
+public class Quest
+{
+	private NPC m_NPC;
+	[SerializeField] private string m_Name;
+	[SerializeField] [EnumFlagsAttribute] private Item m_Item;
+	[SerializeField] private int m_ItemQuantity;
+	[SerializeField] private QuestState m_State;
+	[SerializeField] private Dialogue dialogue;
+	
+	public Quest()
+	{
+		m_NPC = null;
+		m_Name = "Default quest";
+		m_Item = Item.None;
+		m_ItemQuantity = 0;
+	}
+	
+	public void SetNPC(NPC npc)
+	{
+		m_NPC = npc;
+	}
+	
+	public void GetInfo()
+	{
+		Debug.LogFormat("QUEST INFORMATION: Name {0}: Items required: {1} - Quantity: {2} - State: {3}", this.m_Name, this.m_Item, this.m_ItemQuantity, this.m_State);
+	}
+	
+	public string GetName()
+	{
+		return m_Name;
+	}
+	
+	public Item GetItem()
+	{
+		return m_Item;
+	}
+	
+	public int GetItemQuantity()
+	{
+		return m_ItemQuantity;
+	}
+	
+	public void SetState(QuestState state)
+	{
+		m_State = state;
+	}
+	
+	public QuestState GetState()
+	{
+		return m_State;
+	}
+	
+}

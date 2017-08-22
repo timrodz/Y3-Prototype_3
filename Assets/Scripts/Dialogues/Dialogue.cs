@@ -6,5 +6,11 @@ using UnityEngine;
 public class Dialogue
 {
     [TextArea(1, 4)]
-	public string[] sentences;
+	[SerializeField] private string[] m_Sentences;
+    
+    public string[] GetSentences()
+    {
+        return m_Sentences;
+    }
+    
 }

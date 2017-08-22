@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d5de3e7a10ee445a2bbf51727a7985d5
+timeCreated: 1503364943
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Just tell me what
+  fontNames:
+  - Just tell me what
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 9ce3515f1368645519155ad3c13b70ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

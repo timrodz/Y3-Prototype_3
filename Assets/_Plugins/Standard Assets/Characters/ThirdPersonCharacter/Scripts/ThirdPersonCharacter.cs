@@ -52,7 +52,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         void OnEnable()
         {
             EventManager.StartListening(EventName.DialogueStart, PreventMovement);
-            EventManager.StartListening(EventName.DialogueClose, PreventMovement);
+            EventManager.StartListening(EventName.DialogueEnd, AllowMovement);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         void OnDisable()
         {
             EventManager.StopListening(EventName.DialogueStart, PreventMovement);
-            EventManager.StopListening(EventName.DialogueClose, PreventMovement);
+            EventManager.StopListening(EventName.DialogueEnd, AllowMovement);
         }
 
         private void AllowMovement()
@@ -222,6 +222,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_IsGrounded = false;
                 m_Animator.applyRootMotion = false;
                 m_GroundCheckDistance = 0.1f;
+                EventManager.Invoke(EventName.PlayerJump);
             }
         }
 

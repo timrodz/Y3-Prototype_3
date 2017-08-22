@@ -11,6 +11,8 @@ public class NPC
     
     [SerializeField] private Dialogue m_Dialogue;
     
+    [SerializeField] private List<Quest> m_Quests = new List<Quest>();
+    
     public NPC()
     {
         m_Name = "Default_NPC";
@@ -48,9 +50,32 @@ public class NPC
         return m_IsInteracting;
     }
     
+    public void SetDialogue(Dialogue dialogue)
+    {
+        m_Dialogue = dialogue;
+    }
+    
     public Dialogue GetDialogue()
     {
         return m_Dialogue;
+    }
+    
+    public void SetQuests()
+    {        
+        foreach(Quest _quest in m_Quests)
+        {
+            _quest.GetInfo();
+            _quest.SetNPC(this);
+        }
+    }
+    
+    public Quest GetMostRecentQuest()
+    {
+        if (m_Quests.Count > 0)
+        {
+            return (m_Quests[0]);
+        }
+        return null;
     }
 
 }

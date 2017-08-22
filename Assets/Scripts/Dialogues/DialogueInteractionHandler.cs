@@ -22,6 +22,7 @@ public class DialogueInteractionHandler : MonoBehaviour
     private Vector3 m_InteractableImageScale;
 
     private bool m_CanInteract;
+    Tween interactableImageTween;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -31,7 +32,7 @@ public class DialogueInteractionHandler : MonoBehaviour
         m_Transparency.alpha = 0;
         m_InteractableImageScale = m_InteractableImage.rectTransform.localScale;
     }
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -40,21 +41,11 @@ public class DialogueInteractionHandler : MonoBehaviour
     {
         Setup();
     }
-    
+
     private void Setup()
     {
         m_NPCInfo = GetComponentInParent<NPCHolder>().NPC;
         m_NameField.text = m_NPCInfo.GetName();
-    }
-
-    private void LoadImageButton()
-    {
-        var sprite = Resources.Load<Sprite>("UI/Buttons/Interact_Button");
-        if (sprite)
-        {
-            m_InteractableImage.sprite = sprite;
-        }
-
     }
 
     /// <summary>
@@ -65,6 +56,7 @@ public class DialogueInteractionHandler : MonoBehaviour
         EventManager.StartListening(EventName.OnPlayerTriggerEnter, ShowPanel);
         EventManager.StartListening(EventName.OnPlayerTriggerExit, HidePanel);
         EventManager.StartListening(EventName.DialogueStart, HidePanelButtonImage);
+        EventManager.StartListening(EventName.DialogueEnd, ShowPanelButtonImage);
     }
 
     /// <summary>
@@ -75,6 +67,7 @@ public class DialogueInteractionHandler : MonoBehaviour
         EventManager.StopListening(EventName.OnPlayerTriggerEnter, ShowPanel);
         EventManager.StopListening(EventName.OnPlayerTriggerExit, HidePanel);
         EventManager.StopListening(EventName.DialogueStart, HidePanelButtonImage);
+        EventManager.StopListening(EventName.DialogueEnd, ShowPanelButtonImage);
     }
 
     private void ShowPanel()
@@ -89,51 +82,71 @@ public class DialogueInteractionHandler : MonoBehaviour
         Debug.Log("Showing " + name);
 
         m_CanInteract = true;
-        m_Transparency.DOFade(1, 0.15f);
+        m_Transparency.DOFade(1, 0.35f);
 
         if (m_IsInteractable)
         {
-            LoadImageButton();
             m_InteractableImage.DOFade(1, 0.25f);
-            m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale * 1.35f, 0.4f).SetLoops(-1, LoopType.Yoyo);
+            ShowPanelButtonImage();
         }
     }
 
     private void HidePanel()
     {
-        // if (this.gameObject != EventManager.GetRegisteredSender()) return;
+        if (this.gameObject != EventManager.GetRegisteredSender()) return;
 
         Debug.Log("Hiding " + name);
 
         m_CanInteract = false;
-        m_Transparency.DOFade(0, 0.05f);
+        m_Transparency.DOFade(0, 0.15f);
 
         if (m_IsInteractable)
         {
+            interactableImageTween.SetLoops(0);
+            interactableImageTween.Complete();
+            interactableImageTween.Kill();
             m_InteractableImage.rectTransform.localScale = m_InteractableImageScale;
         }
     }
-    
+
+    private void ShowPanelButtonImage()
+    {
+        Debug.Log("Showing " + name + " button image");
+
+        if (m_IsInteractable)
+        {
+            interactableImageTween.SetLoops(0);
+            interactableImageTween.Complete();
+            interactableImageTween.Kill();
+            m_InteractableImage.DOFade(1, 0.25f);
+            interactableImageTween = m_InteractableImage.rectTransform.DOScale(m_InteractableImageScale * 1.35f, 0.4f).SetLoops(-1, LoopType.Yoyo);
+        }
+    }
+
     private void HidePanelButtonImage()
     {
         Debug.Log("Hiding " + name + " button image");
 
         if (m_IsInteractable)
         {
+            interactableImageTween.SetLoops(0);
+            interactableImageTween.Complete();
+            interactableImageTween.Kill();
             m_InteractableImage.DOFade(0, 0.25f);
+            m_InteractableImage.rectTransform.localScale = m_InteractableImageScale;
         }
     }
-    
+
     public bool IsInteractable()
     {
         return m_IsInteractable;
     }
-    
+
     public bool CanInteract()
     {
         return m_CanInteract;
     }
-    
+
     public NPC GetNPC()
     {
         return m_NPCInfo;

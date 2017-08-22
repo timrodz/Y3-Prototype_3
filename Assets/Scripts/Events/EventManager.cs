@@ -36,10 +36,11 @@ public class EventManager : MonoBehaviour
 	}
 	
 	// Subscribes, Unsubscribes messages
-	private Dictionary<EventName, UnityEvent> m_EventDictionary;
+	private Dictionary<EventName, UnityEvent> m_EventDictionary = new Dictionary<EventName, UnityEvent>();
 	
 	private GameObject m_RegisteredSender;
 	private EventName m_LastEvent;
+	private Quest m_RegisteredQuest;
 	
 	// -------------------------------------------------------------------
 	
@@ -162,58 +163,15 @@ public class EventManager : MonoBehaviour
 	{
 		return (Instance.m_LastEvent);
 	}
+	
+	public static void SetQuest(Quest sender)
+	{
+		Instance.m_RegisteredQuest = sender;
+	}
+	
+	public static Quest GetQuest()
+    {
+        return (Instance.m_RegisteredQuest);
+    }
 
 } // EventManager
-
-// -------------------------------------------------------------------
-
-public enum EventName
-{
-    NONE = 0,
-    OnPlayerTriggerEnter,
-    OnPlayerTriggerExit,
-	DialogueRequest,
-	DialogueStart,
-	DialogueClose
-}
-
-// -------------------------------------------------------------------
-
-public struct CustomEvent
-{
-    private EventName name;
-    private GameObject sender;
-	
-	public CustomEvent(EventName Name)
-    {
-        name = Name;
-        sender = null;
-    }
-
-    public CustomEvent(EventName Name, GameObject sender)
-    {
-        name = Name;
-        this.sender = sender;
-    }
-	
-	public void SetName(EventName name)
-	{
-		this.name = name;
-	}
-
-    public EventName GetName()
-    {
-        return name;
-    }
-	
-	public void SetSender(GameObject sender)
-	{
-		this.sender = sender;
-	}
-	
-	public GameObject GetSender()
-    {
-        return sender;
-    }
-	
-}

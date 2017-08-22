@@ -68,13 +68,13 @@ namespace UnityStandardAssets.Cameras
         void OnEnable()
         {
             EventManager.StartListening(EventName.DialogueStart, CenterCameraInDialogue);
-            EventManager.StartListening(EventName.DialogueClose, ReturnCameraBackToTarget);
+            EventManager.StartListening(EventName.DialogueEnd, ReturnCameraBackToTarget);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening(EventName.DialogueStart, CenterCameraInDialogue);
-            EventManager.StopListening(EventName.DialogueClose, ReturnCameraBackToTarget);
+            EventManager.StopListening(EventName.DialogueEnd, ReturnCameraBackToTarget);
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -94,8 +94,7 @@ namespace UnityStandardAssets.Cameras
             }
 
             Debug.Log(">> Centering camera in dialogue");
-            m_CameraPivot.DOLocalMove(m_CameraPivotOffset, 0.1f);
-            // m_CameraPivot.localPosition = m_CameraPivotOffset;
+            m_CameraPivot.DOLocalMove(m_CameraPivotOffset, 0.25f);
 
             // Set the last target to be the current target (Usually the player)
             m_LastTarget = m_Target;
@@ -113,19 +112,24 @@ namespace UnityStandardAssets.Cameras
             m_Target = m_DialogueMiddlePoint;
 
             Debug.Log(">> Making objects look at each other");
-            
-
         }
 
         private void ReturnCameraBackToTarget()
         {
             m_Target = m_LastTarget;
-            m_CameraPivot.DOLocalMove(m_OriginalCameraPivotOffset, 1);
+            m_CameraPivot.DOLocalMove(m_OriginalCameraPivotOffset, 0.25f);
         }
 
         protected override void FollowTarget(float deltaTime)
         {
             if (m_Target == null) return;
+            
+            if (m_Target == m_DialogueMiddlePoint) 
+            {
+                transform.position = Vector3.Lerp(transform.position, m_Target.position, deltaTime * m_MoveSpeed * 0.5f);
+                return;
+            }
+            
             // Move the rig towards target position.
             transform.position = Vector3.Lerp(transform.position, m_Target.position, deltaTime * m_MoveSpeed);
         }

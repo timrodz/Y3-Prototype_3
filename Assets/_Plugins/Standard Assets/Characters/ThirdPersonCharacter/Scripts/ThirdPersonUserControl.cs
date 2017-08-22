@@ -39,7 +39,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         void OnEnable()
         {
             EventManager.StartListening(EventName.DialogueStart, PreventMovement);
-            EventManager.StartListening(EventName.DialogueClose, PreventMovement);
+            EventManager.StartListening(EventName.DialogueEnd, AllowMovement);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         void OnDisable()
         {
             EventManager.StopListening(EventName.DialogueStart, PreventMovement);
-            EventManager.StopListening(EventName.DialogueClose, PreventMovement);
+            EventManager.StopListening(EventName.DialogueEnd, AllowMovement);
         }
 
         private void Update()
@@ -96,8 +96,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             Debug.Log("Allowing player movement");
             m_CanMove = true;
-            
-            
         }
 
         private void PreventMovement()
