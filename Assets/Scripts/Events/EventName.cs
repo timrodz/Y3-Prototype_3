@@ -13,7 +13,8 @@ public enum EventName
 	QuestFail = (1 << 7),
 	QuestComplete = (1 << 8),
     QuestCheck = (1 << 9),
-	PlayerJump = (1 << 10)
+	PlayerJump = (1 << 10),
+    PlayerItemPickup = (1 << 11)
 }
 
 public struct CustomEvent
