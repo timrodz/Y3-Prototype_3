@@ -4,11 +4,13 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 
+
 public class ItemDatabase : MonoBehaviour
 {
+    [HideInInspector]
     public static ItemDatabase instance;
 
-    private List<Item> database = new List<Item>();
+    public List<Item> database;
     private JsonData itemData;
 
 
@@ -17,6 +19,7 @@ public class ItemDatabase : MonoBehaviour
         if (instance != null)
             Destroy(this);
 
+        database = new List<Item>(); 
         //Item item = new Item(0, "Honey", 5);
         //database.Add(item);
         //Debug.Log(database[0].Title);
@@ -30,6 +33,18 @@ public class ItemDatabase : MonoBehaviour
         instance = this;
     }
 
+    public void OnValidate()
+    {
+        database = new List<Item>();
+        //Item item = new Item(0, "Honey", 5);
+        //database.Add(item);
+        //Debug.Log(database[0].Title);
+        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/Items.json"));
+
+        ConstructItemDatabase();
+
+        instance = this;
+    }
 
     public Item FetchItemByID(int ID)
     {
@@ -44,6 +59,16 @@ public class ItemDatabase : MonoBehaviour
         return null;
     }
 
+    public void EditorCreateDatabase()
+    {
+        
+    }
+
+    public void EditorAddItem()
+    {
+        database.Add(new Item());
+    }
+
     void ConstructItemDatabase()
     {
         //print(itemData.Count);
@@ -56,24 +81,26 @@ public class ItemDatabase : MonoBehaviour
 
 }
 
+[System.Serializable]
 public class Item
 {
     //LOADED VARIABLES FROM JSON LIST
 
-    public int ID { get; set; }
-    public string Title { get; set; }
-    public int Value { get; set; }
+    public int ID;
+    public string Title;
+    public int Value;
     public int MaxStack { get; set; }
-    public bool Edible { get; set; }
-    public string Description { get; set; }
+    public bool Edible;
+    public string Description;
     public string spriteName { get; set; }
     public bool usingSpreadSheet { get; set; }
     public int sliceIndex { get; set; }
 
 
-    public int count { get; set; }
+    public int count;
 
-    public Sprite Sprite { get; set; }
+    [PreviewSprite]
+    public Sprite Sprite;
 
     public Item(int id, string title, int value, int maxStack, int edible, string description, string spriteName = "", int useSheet = 0, int sliceIndex = 0)
     {

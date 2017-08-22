@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ItemInventory : MonoBehaviour {
 
-    GameObject inventoryPanel;
-    GameObject slotPanel;
+    //GameObject inventoryPanel;
+    //GameObject slotPanel;
 
-    ItemDatabase database;
+    [HideInInspector]
+    private ItemDatabase database;
 
     public GameObject inventorySlot;
     public GameObject inventoryItem;
@@ -21,8 +22,8 @@ public class ItemInventory : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        inventoryPanel = GameObject.Find("Inventory Panel");
-        slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
+        //inventoryPanel = GameObject.Find("Inventory Panel");
+        //slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
         database = ItemDatabase.instance;
 
         slots = GetComponentsInChildren<InventorySlot>();
