@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour {
 
-    public ItemInfo item;
+    static ItemPickUp prefab; 
 
-
-    public void PickUp()
-    {
-        bool wasPickedUp = Inventory.instance.Add(item);
-
-        if(wasPickedUp)
-        {
-            Destroy(gameObject);
-        }
-    }
 }

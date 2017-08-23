@@ -1,0 +1,59 @@
+[
+
+
+  {
+    "id": 0,
+    "title": "Potion",
+    "value": 1,
+    "stats": {
+      "maxstack": 99,
+      "edible": 1
+    },
+    "description": "A description",
+    "sprite": "item_spreadhseet_0",
+    "spreadsheet": 1,
+    "spriteIndex": 0
+  },
+
+  {
+    "id": 1,
+    "title": "Carrot",
+    "value": 1,
+    "stats": {
+      "maxstack": 99,
+      "edible": 1
+    },
+    "description": "A description",
+    "sprite": "item_spreadhseet_0",
+    "spreadsheet": 1,
+    "spriteIndex": 1
+  },
+
+  {
+    "id": 2,
+    "title": "Honey",
+    "value": 1,
+    "stats": {
+      "maxstack": 99,
+      "edible": 1
+    },
+    "description": "A description",
+    "sprite": "item_spreadhseet_0",
+    "spreadsheet": 1,
+    "spriteIndex": 2
+  },
+
+  {
+    "id": 3,
+    "title": "Jam",
+    "value": 1,
+    "stats": {
+      "maxstack": 99,
+      "edible": 1
+    },
+    "description": "A description",
+    "sprite": "item_spreadhseet_0",
+    "spreadsheet": 1,
+    "spriteIndex": 3
+  }
+]

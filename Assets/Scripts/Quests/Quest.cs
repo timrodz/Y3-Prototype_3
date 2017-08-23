@@ -16,7 +16,7 @@ public class Quest
 {
 	private NPC m_NPC;
 	[SerializeField] private string m_Name;
-	[SerializeField] [EnumFlagsAttribute] private Item m_Item;
+	[SerializeField] [EnumFlagsAttribute] private ItemHasg m_Item;
 	[SerializeField] private int m_ItemQuantity;
 	[SerializeField] private QuestState m_State;
 	[SerializeField] private Dialogue dialogue;
@@ -25,7 +25,7 @@ public class Quest
 	{
 		m_NPC = null;
 		m_Name = "Default quest";
-		m_Item = Item.None;
+		m_Item = ItemHasg.None;
 		m_ItemQuantity = 0;
 	}
 	
@@ -44,7 +44,7 @@ public class Quest
 		return m_Name;
 	}
 	
-	public Item GetItem()
+	public ItemHasg GetItem()
 	{
 		return m_Item;
 	}

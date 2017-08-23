@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    public Item itemName;
+    public ItemHasg itemName;
     private GameObject Player;
     private PlayerInventory playerInventory;
     

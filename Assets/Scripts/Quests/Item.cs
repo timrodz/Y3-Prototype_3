@@ -1,11 +1,11 @@
 ﻿/// <summary>
 /// Items must be defined by name and then assigning their values via bitwise operation
-/// This allows multiple Item selection (e.g. Honey | Berry)
+/// This allows multiple ItemHasg selection (e.g. Honey | Berry)
 
 /// </summary>
 
 [System.Flags]
-public enum Item
+public enum ItemHasg
 {
     None = (1 << 0),
     Honey = (1 << 1),

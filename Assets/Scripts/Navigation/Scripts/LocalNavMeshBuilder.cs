@@ -55,7 +55,7 @@ public class LocalNavMeshBuilder : MonoBehaviour
         else
             NavMeshBuilder.UpdateNavMeshData(m_NavMesh, defaultBuildSettings, m_Sources, bounds);
 
-        print("Update");
+
     }
 
     static Vector3 Quantize(Vector3 v, Vector3 quant)
