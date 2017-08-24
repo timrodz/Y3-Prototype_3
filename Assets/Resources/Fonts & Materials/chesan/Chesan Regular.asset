@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: Chesan Regular
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1019123528
   material: {fileID: 21089945535387984}
-  materialHashCode: 0
+  materialHashCode: 63292355
   fontAssetType: 1
   m_fontInfo:
     Name: Chesan
     PointSize: 74
-    Scale: 0
+    Scale: 1
     CharacterCount: 97
     LineHeight: 94.25
     Baseline: 0
     Ascender: 76.4375
-    CapHeight: 0
+    CapHeight: 60.5625
     Descender: -17.8125
     CenterLine: 0
     SuperscriptOffset: 76.4375
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 5.419922
     strikethrough: 21.318182
     strikethroughThickness: 5.419922
-    TabWidth: 0
+    TabWidth: 183.75
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 6
     y: 517
-    width: 0
-    height: 0
+    width: 18.375
+    height: 94.25
     xOffset: 0
-    yOffset: 0
+    yOffset: 76.4375
     xAdvance: 18.375
     scale: 1
   - id: 33
@@ -1025,9 +1025,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
