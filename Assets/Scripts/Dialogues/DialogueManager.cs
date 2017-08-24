@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Visual Fields")]
     [SerializeField] private CanvasGroup m_Transparency;
     [SerializeField] private Image m_DialogueFieldImage;
+    private float m_OriginalDialogueFieldVerticalPosition;
     [SerializeField] private TMPro.TextMeshProUGUI m_NameField;
     [SerializeField] private TMPro.TextMeshProUGUI m_TextField;
     [SerializeField] private RectTransform m_NextFieldCursor;
@@ -32,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     private string m_CurrentSentence;
     private Queue<string> m_DialogueQueue = new Queue<string>();
 
+    Tween dialogueTween;
     Tween cursorTween;
 
     /// <summary>
@@ -43,6 +45,7 @@ public class DialogueManager : MonoBehaviour
         m_TextField.text = "";
         m_NextFieldCursorOriginalPosition = m_NextFieldCursor.localPosition;
         m_NextFieldCursor.localScale = Vector3.zero;
+        m_OriginalDialogueFieldVerticalPosition = m_DialogueFieldImage.rectTransform.anchoredPosition.y;
     }
 
     /// <summary>
@@ -103,11 +106,11 @@ public class DialogueManager : MonoBehaviour
             }
 
             Debug.Log(">> Checking if the NPC has assigned quests");
-            
+
             // TODO: Make the player's inventory receive the message and then 
             // invoke a dialogue start message when it's done checking
             // EventManager.Invoke(EventName.QuestCheck);
-            
+
             // For now: Directly start the dialogue
             EventManager.Invoke(EventName.DialogueStart);
 
@@ -120,10 +123,9 @@ public class DialogueManager : MonoBehaviour
 
     private void StartDialogue()
     {
-
         // NPC is setup, begin dialogue conversation
         m_DialogueNPC.AllowInteraction(true);
-        
+
         // Fill the name field with the NPC's name
         m_NameField.text = m_DialogueNPC.GetName();
 
@@ -148,8 +150,8 @@ public class DialogueManager : MonoBehaviour
 
         m_Transparency.DOFade(1, 0.5f);
 
-        m_DialogueFieldImage.rectTransform.DOMoveY(m_DialogueFieldImage.rectTransform.localPosition.y - 60, 0.5f).From().SetEase(Ease.OutBack);
-        
+        dialogueTween = m_DialogueFieldImage.rectTransform.DOMoveY(m_OriginalDialogueFieldVerticalPosition - 60, 0.5f).From().SetEase(Ease.OutBack);
+
         m_HasDialogueStarted = true;
 
         ProcessTextField();
@@ -159,6 +161,10 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         Debug.Log(">> Ending dialogue");
+
+        dialogueTween.SetLoops(0);
+        dialogueTween.Complete();
+        dialogueTween.Kill();
 
         m_HasDialogueStarted = false;
         m_IsProcessingText = false;
@@ -181,7 +187,7 @@ public class DialogueManager : MonoBehaviour
             EventManager.Invoke(EventName.QuestStart);
 
             QuestManager.AddQuest(quest);
-            
+
             QuestManager.SetCurrentQuest(quest);
         }
     }
@@ -267,10 +273,9 @@ public class DialogueManager : MonoBehaviour
 
         // Show the cursor once the dialogue has finished
         m_NextFieldCursor.DOScale(Vector3.one * 0.25f, 0.2f).OnComplete(() =>
-        {
-            m_IsProcessingText = false;
-            cursorTween = m_NextFieldCursor.DOLocalMoveY(m_NextFieldCursorOriginalPosition.y - 5, 0.3f).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo);
-        });
+        { });
+        m_IsProcessingText = false;
+        cursorTween = m_NextFieldCursor.DOLocalMoveY(m_NextFieldCursorOriginalPosition.y - 5, 0.3f).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo);
     }
 
     private NPC SetupDialogueNPC()
