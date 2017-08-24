@@ -8,7 +8,7 @@ using UnityEditor;
 public class ItemPickupEditor : Editor {
 
     int selected = 0;
-
+    int prev = -1;
     bool Edited = false;
 
     public override void OnInspectorGUI()
@@ -30,9 +30,14 @@ public class ItemPickupEditor : Editor {
 
         selected = EditorGUILayout.Popup("Item Type", selected, options);
 
-        pickup.item = new Item(database.FetchItemByID(selected));
+        if(!pickup.isPickupInstance)
+        {
+            if (selected != prev)
+            {
+                prev = selected;
+                pickup.item = new Item(database.FetchItemByID(selected));
+            }
+        }
     }
-
-
 }
 
