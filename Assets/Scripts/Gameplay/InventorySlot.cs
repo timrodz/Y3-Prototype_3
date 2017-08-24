@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour {
 
@@ -12,12 +13,15 @@ public class InventorySlot : MonoBehaviour {
 
     public Item item;
     Image icon;
-    Text text;
+    TextMeshProUGUI text;
 
-    public void Start()
+    public void Awake()
     {
         icon = GetComponentInChildren<Image>();
-        text = GetComponentInChildren<Text>();
+        text = GetComponentInChildren<TextMeshProUGUI>();
+
+        icon.color = Utils.ChangeOpacity(icon.color, 0);
+        text.text = "";
     }
 
     public bool SetItem(Item item)

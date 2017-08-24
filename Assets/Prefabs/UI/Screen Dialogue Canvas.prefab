@@ -207,9 +207,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Mr. Nice Bear
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b8cb7a247e91e4363969c4da6dc09069, type: 2}
-  m_sharedMaterial: {fileID: 21810369819741180, guid: b8cb7a247e91e4363969c4da6dc09069,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -348,9 +347,8 @@ MonoBehaviour:
   m_text: 'One thing though: I''m always down for honey, so if you could find me some
     I would definitely owe you one.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32590d476ee074983885a0eca223417c, type: 2}
-  m_sharedMaterial: {fileID: 21999417168270446, guid: 32590d476ee074983885a0eca223417c,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
