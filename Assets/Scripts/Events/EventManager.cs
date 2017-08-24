@@ -3,6 +3,10 @@ using System.Collections.Generic; // Dictionary
 using UnityEngine;
 using UnityEngine.Events; // UnityEvents
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Manages event handling through UnityEvents
 /// 
@@ -41,6 +45,9 @@ public class EventManager : MonoBehaviour
 	private GameObject m_RegisteredSender;
 	private EventName m_LastEvent;
 	private Quest m_RegisteredQuest;
+
+	[Header("DEBUG")]
+	[SerializeField] private EventName m_EventToSend;
 	
 	// -------------------------------------------------------------------
 	
@@ -73,13 +80,13 @@ public class EventManager : MonoBehaviour
 		// If event name exists, populate 'thisEvent' with the event found
 		if (Instance.m_EventDictionary.TryGetValue(eventName, out thisEvent))
 		{
-			Debug.Log(">> Added listener " + listener.Method.Name + " to event: " + eventName.ToString());
+			Debug.Log("-- Added listener " + listener.Method.Name + " to event: " + eventName.ToString());
 			thisEvent.AddListener(listener);
 		}
 		// Event not found
 		else
 		{
-			Debug.Log(">> Added listener " + listener.Method.Name + " to event: " + eventName.ToString());
+			Debug.Log("-- Added listener " + listener.Method.Name + " to event: " + eventName.ToString());
 			thisEvent = new UnityEvent();
 			thisEvent.AddListener(listener);
 			Instance.m_EventDictionary.Add(eventName, thisEvent);
@@ -101,7 +108,7 @@ public class EventManager : MonoBehaviour
 		// If event name exists, populate 'thisEvent' with the event found
 		if (Instance.m_EventDictionary.TryGetValue(eventName, out thisEvent))
 		{
-			Debug.Log("<< Removed listener " + listener.Method.Name + " from event: " + eventName.ToString());
+			Debug.Log("~~ Removed listener " + listener.Method.Name + " from event: " + eventName.ToString());
 			thisEvent.RemoveListener(listener);
 		}
 	}
@@ -148,6 +155,20 @@ public class EventManager : MonoBehaviour
 			Instance.m_LastEvent = _event;
 		}
 	}
+
+	public void InvokeCurrentEvent()
+	{
+		UnityEvent thisEvent = null;
+		
+		if (Instance.m_EventDictionary.TryGetValue(Instance.m_EventToSend, out thisEvent))
+		{
+			Debug.Log(Instance.m_EventToSend + " Invoked");
+			thisEvent.Invoke();
+			
+			// Register this event as the last event
+			Instance.m_LastEvent = Instance.m_EventToSend;
+		}
+	}
 	
 	public static void ResetSender()
 	{
@@ -175,3 +196,23 @@ public class EventManager : MonoBehaviour
     }
 
 } // EventManager
+
+#if UNITY_EDITOR
+[CustomEditor(typeof (EventManager))]
+public class EventManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        EventManager em = (EventManager) target;
+
+        if (DrawDefaultInspector()) {}
+
+        if (GUILayout.Button("Send chosen Event"))
+        {
+            em.InvokeCurrentEvent();
+        }
+
+    }
+
+}
+#endif

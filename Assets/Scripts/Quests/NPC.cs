@@ -60,15 +60,6 @@ public class NPC
         return m_Dialogue;
     }
     
-    public void SetQuests()
-    {        
-        foreach(Quest _quest in m_Quests)
-        {
-            _quest.GetInfo();
-            _quest.SetNPC(this);
-        }
-    }
-    
     public Quest GetMostRecentQuest()
     {
         if (m_Quests.Count > 0)
