@@ -7,7 +7,6 @@ public class PlayerEventHandler : MonoBehaviour
     private CustomEvent m_Event;
 	
 	private bool m_CanInteract = true;
-    private bool ColliderActive = false;
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
@@ -15,7 +14,7 @@ public class PlayerEventHandler : MonoBehaviour
     void Update()
     {
 #if UNITY_STANDALONE
-        if (ColliderActive && m_CanInteract && Input.GetKeyDown(KeyCode.E))
+        if (m_CanInteract && Input.GetKeyDown(KeyCode.E))
         {
             EventManager.Invoke(EventName.DialogueRequest);
         }
@@ -28,9 +27,7 @@ public class PlayerEventHandler : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     void OnTriggerEnter(Collider other)
     {
-        ColliderActive = true;
-
-        m_Event = new CustomEvent(EventName.OnPlayerTriggerEnter, gameObject);
+        m_Event = new CustomEvent(EventName.OnPlayerTriggerEnter, other.gameObject);
         EventManager.Invoke(m_Event, true);
     }
 
@@ -40,9 +37,9 @@ public class PlayerEventHandler : MonoBehaviour
     /// <param name="other">The other Collider involved in this collision.</param>
     void OnTriggerExit(Collider other)
     {
+
         // m_Event = new CustomEvent(EventName.OnPlayerTriggerExit, other.gameObject);
         EventManager.Invoke(EventName.OnPlayerTriggerExit);
         EventManager.ResetSender();
-        ColliderActive = false;
     }
 }

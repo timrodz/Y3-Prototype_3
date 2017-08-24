@@ -9,6 +9,8 @@ public class ItemPickupEditor : Editor {
 
     int selected = 0;
 
+    bool Edited = false;
+
     public override void OnInspectorGUI()
     {
         ItemPickUp pickup = (ItemPickUp)target;
@@ -30,5 +32,7 @@ public class ItemPickupEditor : Editor {
 
         pickup.item = new Item(database.FetchItemByID(selected));
     }
+
+
 }
 

@@ -38,11 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30959618, g: 0.18666473, b: 0.44796473, a: 1}
+  m_IndirectSpecularColor: {r: 0.30959615, g: 0.18666473, b: 0.44796452, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 9
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 8
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_ShadowMaskMode: 2
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -424,7 +424,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4322422008711020, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.8602736
+      value: 5.58
       objectReference: {fileID: 0}
     - target: {fileID: 4322422008711020, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -432,7 +432,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4322422008711020, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.240425
+      value: 9.76
       objectReference: {fileID: 0}
     - target: {fileID: 4322422008711020, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -479,6 +479,12 @@ Prefab:
       propertyPath: m_textInfo.wordCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114544829069145924, guid: 2bc5bf55ffc1f524084f51db58fc824a,
+        type: 2}
+      propertyPath: item.Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e6b070860824f3647b9eb2d174fa68fe,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
   m_IsPrefabParent: 0
@@ -530,20 +536,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -1780,7 +1772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.4, y: 18.4}
+  m_AnchoredPosition: {x: -8.399994, y: 18.4}
   m_SizeDelta: {x: 140, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1197656015
@@ -2460,28 +2452,28 @@ MonoBehaviour:
     Edible: 1
     Description: A description
     count: 1
-    Sprite: {fileID: 21300000, guid: 81f59d7a706fe48b493c1755acc002f0, type: 3}
+    Sprite: {fileID: 21300000, guid: e6b070860824f3647b9eb2d174fa68fe, type: 3}
   - ID: 1
     Title: Carrot
     Value: 1
     Edible: 1
     Description: A description
     count: 1
-    Sprite: {fileID: 21300002, guid: 81f59d7a706fe48b493c1755acc002f0, type: 3}
+    Sprite: {fileID: 21300002, guid: e6b070860824f3647b9eb2d174fa68fe, type: 3}
   - ID: 2
     Title: Honey
     Value: 1
     Edible: 1
     Description: A description
     count: 1
-    Sprite: {fileID: 21300004, guid: 81f59d7a706fe48b493c1755acc002f0, type: 3}
+    Sprite: {fileID: 21300004, guid: e6b070860824f3647b9eb2d174fa68fe, type: 3}
   - ID: 3
     Title: Jam
     Value: 1
     Edible: 1
     Description: A description
     count: 1
-    Sprite: {fileID: 21300006, guid: 81f59d7a706fe48b493c1755acc002f0, type: 3}
+    Sprite: {fileID: 21300006, guid: e6b070860824f3647b9eb2d174fa68fe, type: 3}
 --- !u!114 &1568750305
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,24 @@ public class ItemInventory : MonoBehaviour {
         slots = GetComponentsInChildren<InventorySlot>();
 	}
 
+    void OnEnable()
+    {
+        EventManager.StartListening(EventName.QuestCheck, QuestCheckHasItem);
+    }
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    void OnDisable()
+    {
+        EventManager.StartListening(EventName.QuestCheck, QuestCheckHasItem);
+    }
+
+    public void QuestCheckHasItem()
+    {
+
+    }
+
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.G))
@@ -36,6 +54,11 @@ public class ItemInventory : MonoBehaviour {
             //print(AddItem(1).ToString());
             AddItem(2);
         }
+    }
+
+    public void HasItemRequest(int id)
+    {
+
     }
 
     public ItemState AddItem(int id, int countMult = 1)

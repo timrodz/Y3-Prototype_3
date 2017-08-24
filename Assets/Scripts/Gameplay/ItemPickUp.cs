@@ -34,6 +34,10 @@ public class ItemPickUp : MonoBehaviour {
     
     }
 
+    public void OnValidate()
+    {
+
+    }
 
     public void OnTriggerEnter(Collider other)
     {
