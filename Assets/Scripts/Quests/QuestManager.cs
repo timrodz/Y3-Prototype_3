@@ -33,7 +33,10 @@ public class QuestManager : MonoBehaviour
 
     [Space]
     [Header("Quest information")]
+    [SerializeField] private List<NPC> m_NPCList = new List<NPC>();
     [SerializeField] private List<Quest> m_QuestList = new List<Quest>();
+    [SerializeField] private List<Quest> m_CompletedQuestList = new List<Quest>();
+    [SerializeField] private List<Quest> m_FailedQuestList = new List<Quest>();
     [SerializeField] private Quest m_CurrentQuest;
 
     /// <summary>
@@ -54,6 +57,10 @@ public class QuestManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening(EventName.PlayerJump, RespondToPlayerJump);
+        EventManager.StartListening(EventName.QuestCheck, CompleteCurrentQuest);
+        EventManager.StartListening(EventName.QuestCheckAll, CheckAllQuests);
+        EventManager.StartListening(EventName.QuestCompleteAll, CompleteAllQuests);
+        EventManager.StartListening(EventName.QuestFailAll, FailAllQuests);
     }
 
     /// <summary>
@@ -62,6 +69,10 @@ public class QuestManager : MonoBehaviour
     void OnDisable()
     {
         EventManager.StopListening(EventName.PlayerJump, RespondToPlayerJump);
+        EventManager.StopListening(EventName.QuestCheck, CompleteCurrentQuest);
+        EventManager.StopListening(EventName.QuestCheckAll, CheckAllQuests);
+        EventManager.StopListening(EventName.QuestCompleteAll, CompleteAllQuests);
+        EventManager.StopListening(EventName.QuestFailAll, FailAllQuests);
     }
 
     private void ShowQuestPanel()
@@ -106,8 +117,24 @@ public class QuestManager : MonoBehaviour
     public static void AddQuest(Quest quest)
     {
         QuestManager.Instance.m_QuestList.Add(quest);
+
         Debug.Log("==== Added quest ====");
+
         quest.GetInfo();
+    }
+
+    public static void AddNPC(NPC npc)
+    {
+        int index = QuestManager.Instance.m_NPCList.IndexOf(npc);
+        if (index == -1)
+        {
+            QuestManager.Instance.m_NPCList.Add(npc);
+            Debug.Log("==== Added NPC ====");
+
+            Debug.Log(">> " + npc.GetName());
+        }
+
+        QuestManager.AddQuest(QuestManager.Instance.m_NPCList[index].GetMostRecentQuest());
     }
 
     public static QuestState CheckQuest(Quest quest)
@@ -117,7 +144,9 @@ public class QuestManager : MonoBehaviour
         if (index != -1)
         {
             Debug.Log("==== Checked quest ====");
+
             quest.GetInfo();
+
             return (QuestManager.Instance.m_QuestList[index].GetState());
         }
 
@@ -127,13 +156,25 @@ public class QuestManager : MonoBehaviour
     public static void FailQuest(Quest quest)
     {
         int index = QuestManager.Instance.m_QuestList.IndexOf(quest);
+
         if (index != -1)
         {
             Debug.Log("==== Failed quest ====");
+
             QuestManager.Instance.m_QuestList[index].SetState(QuestState.Failed);
+
             quest.GetInfo();
-            EventManager.SetQuest(QuestManager.Instance.m_QuestList[index]);
+
+            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+
+            EventManager.Invoke(EventName.QuestFail);
+
+            QuestManager.Instance.m_FailedQuestList.Add(QuestManager.Instance.m_QuestList[index]);
+
+            QuestManager.Instance.m_QuestList.Remove(QuestManager.Instance.m_QuestList[index]);
         }
+
+        QuestManager.DeterminePanelVisibility();
     }
 
     public static void CompleteQuest(Quest quest)
@@ -141,19 +182,108 @@ public class QuestManager : MonoBehaviour
         int index = QuestManager.Instance.m_QuestList.IndexOf(quest);
         if (index != -1)
         {
-            Debug.Log("==== Completed quest quest ====");
+            Debug.Log("==== Completed quest ====");
+
             QuestManager.Instance.m_QuestList[index].SetState(QuestState.Complete);
+
             quest.GetInfo();
-            EventManager.SetQuest(QuestManager.Instance.m_QuestList[index]);
+
+            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+
             EventManager.Invoke(EventName.QuestComplete);
+
+            QuestManager.Instance.m_CompletedQuestList.Add(QuestManager.Instance.m_QuestList[index]);
+
+            QuestManager.Instance.m_QuestList.Remove(QuestManager.Instance.m_QuestList[index]);
         }
 
-        // Hide the quest panel and empty the quest text 
-        // field if there are no more quests
+        QuestManager.DeterminePanelVisibility();
+    }
+
+    public static void CompleteCurrentQuest()
+    {
+        int index = QuestManager.Instance.m_QuestList.IndexOf(QuestManager.Instance.m_CurrentQuest);
+
+        if (index != -1)
+        {
+            Debug.Log("==== Completed current quest ====");
+
+            QuestManager.Instance.m_QuestList[index].SetState(QuestState.Complete);
+
+            QuestManager.Instance.m_CurrentQuest.GetInfo();
+
+            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+
+            EventManager.Invoke(EventName.QuestComplete);
+
+            QuestManager.Instance.m_CompletedQuestList.Add(QuestManager.Instance.m_QuestList[index]);
+
+            QuestManager.Instance.m_QuestList.Remove(QuestManager.Instance.m_QuestList[index]);
+        }
+
+        QuestManager.DeterminePanelVisibility();
+    }
+
+    public static void CheckAllQuests()
+    {
+        Debug.Log("==== STARTED QUESTS ====");
+        foreach(Quest q in QuestManager.Instance.m_QuestList)
+        {
+            q.GetInfo();
+        }
+        Debug.Log("==== COMPLETED QUESTS ====");
+        foreach(Quest q in QuestManager.Instance.m_CompletedQuestList)
+        {
+            q.GetInfo();
+        }
+        Debug.Log("==== FAILED QUESTS ====");
+        foreach(Quest q in QuestManager.Instance.m_FailedQuestList)
+        {
+            q.GetInfo();
+        }
+    }
+
+    public static void CompleteAllQuests()
+    {
+        Debug.Log("==== Completing all quests ====");
+
+        for (int index = 0; index < QuestManager.Instance.m_QuestList.Count; index++)
+        {
+            QuestManager.Instance.m_QuestList[index].SetState(QuestState.Complete);
+
+            QuestManager.Instance.m_CurrentQuest.GetInfo();
+
+            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+
+            EventManager.Invoke(EventName.QuestComplete);
+
+            QuestManager.Instance.m_CompletedQuestList.Add(QuestManager.Instance.m_QuestList[index]);
+
+            QuestManager.Instance.m_QuestList.Remove(QuestManager.Instance.m_QuestList[index]);
+        }
+
+        QuestManager.DeterminePanelVisibility();
+    }
+
+    public static void FailAllQuests()
+    {
+        foreach(Quest q in QuestManager.Instance.m_QuestList)
+        {
+            q.GetInfo();
+            q.SetState(QuestState.Failed);
+            QuestManager.Instance.m_CompletedQuestList.Add(q);
+            QuestManager.Instance.m_QuestList.Remove(q);
+
+        }
+        QuestManager.DeterminePanelVisibility();
+    }
+
+    private static void DeterminePanelVisibility()
+    {
         if (QuestManager.Instance.m_QuestList.Count <= 0)
         {
-            QuestManager.Instance.m_QuestTextField.text = "";
-            QuestManager.Instance.HideQuestPanel();
+            Debug.Log(">> Hiding quest panel - No more active quests");
+            QuestManager.Instance.m_Transparency.DOFade(0, 0.2f);
         }
     }
 

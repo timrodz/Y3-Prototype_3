@@ -91,6 +91,12 @@ namespace UnityStandardAssets.Cameras
             if (null == m_Pivot)
             {
                 Debug.LogError("@@@@ Pivot is not set");
+                return;
+            }
+
+            if (null == EventManager.GetRegisteredSender())
+            {
+                return;
             }
 
             Debug.Log(">> Centering camera in dialogue");

@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
     [Space]
     [Header("Current Dialogue NPC")]
     [SerializeField] private GameObject m_Sender;
-    [SerializeField] private NPC m_DialogueNPC;
+    [SerializeField] private NPC m_DialogueNPC = null;
     [SerializeField] private CustomEvent m_Event;
 
     private string m_CurrentSentence;
@@ -82,202 +82,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ProcessDialogue()
-    {
-        // Dialogue is currently being shown
-        if (m_IsProcessingText)
-        {
-            Debug.Log(">> Processing text - Can't process dialogue at this time.");
-            return;
-        }
-
-        Debug.Log("==== Processing Dialogue ====");
-        Debug.Log(">> Has dialogue started: " + m_HasDialogueStarted);
-
-        // If the dialogue has not started yet
-        if (!m_HasDialogueStarted)
-        {
-            m_DialogueNPC = SetupDialogueNPC();
-
-            if (null == m_DialogueNPC)
-            {
-                Debug.LogWarning(">> Could not set-up dialogue");
-                return;
-            }
-
-            Debug.Log(">> Checking if the NPC has assigned quests");
-
-            // TODO: Make the player's inventory receive the message and then 
-            // invoke a dialogue start message when it's done checking
-            // EventManager.Invoke(EventName.QuestCheck);
-
-            // For now: Directly start the dialogue
-            // EventManager.Invoke(EventName.DialogueStart);
-
-            return;
-        }
-
-        ProcessTextField();
-
-    }
-
-    private void StartDialogue()
-    {
-        // NPC is setup, begin dialogue conversation
-        m_DialogueNPC.AllowInteraction(true);
-
-        // Fill the name field with the NPC's name
-        m_NameField.text = m_DialogueNPC.GetName();
-
-        Debug.Log(">> Starting conversation with: " + m_DialogueNPC.GetName());
-
-        // Populate sentence queue
-        m_DialogueQueue.Clear();
-
-        foreach(string sentence in m_DialogueNPC.GetDialogue().GetSentences())
-        {
-            m_DialogueQueue.Enqueue(sentence);
-        }
-
-        m_DialogueFieldImage.sprite = m_TextBoxNoBerry;
-
-        // Set a random image (Berry or no berry)
-        int random = Random.Range(0, 2);
-        if (random == 0)
-        {
-            m_DialogueFieldImage.sprite = m_TextBoxBerry;
-        }
-
-        m_Transparency.DOFade(1, 0.5f);
-
-        dialogueTween = m_DialogueFieldImage.rectTransform.DOMoveY(m_OriginalDialogueFieldVerticalPosition - 60, 0.5f).From().SetEase(Ease.OutBack);
-
-        m_HasDialogueStarted = true;
-
-        ProcessTextField();
-
-    }
-
-    private void EndDialogue()
-    {
-        Debug.Log(">> Ending dialogue");
-
-        dialogueTween.SetLoops(0);
-        dialogueTween.Complete();
-        dialogueTween.Kill();
-
-        m_HasDialogueStarted = false;
-        m_IsProcessingText = false;
-        m_Transparency.DOFade(0, 0.25f);
-
-        EventManager.Invoke(EventName.DialogueEnd);
-
-        TryToAssignQuest();
-    }
-
-    private void TryToAssignQuest()
-    {
-        Quest quest = m_DialogueNPC.GetMostRecentQuest();
-
-        // Got most recent quest from NPC
-        if (null != quest)
-        {
-            quest.SetState(QuestState.Started);
-
-            EventManager.Invoke(EventName.QuestStart);
-
-            QuestManager.AddQuest(quest);
-
-            QuestManager.SetCurrentQuest(quest);
-        }
-    }
-
-    private void ProcessTextField()
-    {
-        Debug.Log(">> Processing text field");
-        // Empty the text field
-        m_TextField.text = "";
-
-        // If there are no more sentences left, end the dialogue
-        if (m_DialogueQueue.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
-
-        // Begin processing the text
-        m_IsProcessingText = true;
-
-        m_CurrentSentence = m_DialogueQueue.Dequeue();
-
-        StartCoroutine(AnimateText(m_CurrentSentence, 0.5f, 0.2f, 0.01f));
-    }
-
-    /// <summary>
-    /// Animates the text in a typewriter effect
-    /// </summary>
-    /// <param name="sentence"></param>
-    /// <param name="initialDelay"></param>
-    /// <param name="returnKeyDelay"></param>
-    /// <param name="typingSpeed"></param>
-    /// <returns></returns>
-    private IEnumerator AnimateText(string sentence, float initialDelay, float returnKeyDelay, float typingSpeed)
-    {
-        // Hide the cursor
-        m_NextFieldCursor.DOScale(Vector3.zero, 0.1f);
-        cursorTween.SetLoops(0);
-        cursorTween.Complete();
-        cursorTween.Kill();
-
-        yield return new WaitForSeconds(initialDelay);
-
-        string finalText = "";
-
-        for (int i = 0; i < sentence.Length; i++)
-        {
-            if (!m_IsProcessingText)
-            {
-                Debug.Log(">> Skipped text animation");
-                break;
-            }
-
-            if (sentence[i] == '\n' || sentence[i] == ',')
-            {
-                yield return new WaitForSeconds(returnKeyDelay);
-            }
-
-            else
-            {
-                finalText += sentence[i];
-            }
-
-            m_TextField.text = finalText;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        Debug.Log(">> Finished animating text - Showing next field cursor");
-        ShowNextFieldCursor(sentence);
-
-    }
-
-    /// <summary>
-    /// Show the next field cursor - Called whenever the text animation finishes
-    /// </summary>
-    private void ShowNextFieldCursor(string currentTextField)
-    {
-        Debug.Log(">> Showing next field cursor");
-
-        m_TextField.text = currentTextField;
-
-        m_NextFieldCursor.localPosition = m_NextFieldCursorOriginalPosition;
-
-        // Show the cursor once the dialogue has finished
-        m_NextFieldCursor.DOScale(Vector3.one * 0.25f, 0.2f).OnComplete(() =>
-        { });
-        m_IsProcessingText = false;
-        cursorTween = m_NextFieldCursor.DOLocalMoveY(m_NextFieldCursorOriginalPosition.y - 5, 0.3f).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo);
-    }
-
     private NPC SetupDialogueNPC()
     {
         m_Sender = EventManager.GetRegisteredSender();
@@ -315,12 +119,218 @@ public class DialogueManager : MonoBehaviour
         }
 
         NPC npc = dih.GetNPC();
+
         npc.SetObject(dih.transform.parent.gameObject);
 
-        Debug.Log("===== ACQUIRED NPC INFORMATION ====");
-        Debug.Log("NPC Name: " + npc.GetName());
-
         return npc;
+    }
+
+    private void ProcessDialogue()
+    {
+        Debug.Log("==== Processing Dialogue ====");
+
+        // Dialogue is currently being shown
+        if (m_IsProcessingText)
+        {
+            Debug.Log(">> Processing text - Can't process dialogue at this time.");
+            return;
+        }
+
+        Debug.Log(">> Has dialogue started: " + m_HasDialogueStarted);
+
+        // If the dialogue has not started yet
+        if (!m_HasDialogueStarted)
+        {
+            m_DialogueNPC = SetupDialogueNPC();
+
+            if (null == m_DialogueNPC)
+            {
+                Debug.LogWarning(">> Could not set-up dialogue");
+                return;
+            }
+
+            Debug.Log(">> NPC: " + m_DialogueNPC.GetName());
+
+            Debug.Log(">> Checking if the NPC has assigned quests");
+
+            // TODO: Make the player's inventory receive the message and then 
+            // invoke a dialogue start message when it's done checking
+            EventManager.Invoke(EventName.QuestCheck);
+
+            // For now: Directly start the dialogue
+            // EventManager.Invoke(EventName.DialogueStart);
+
+            return;
+        }
+
+        ProcessTextField();
+
+    }
+
+    private void StartDialogue()
+    {
+        if (null == m_DialogueNPC.GetObject())
+        {
+            return;
+        }
+
+        // NPC is setup, begin dialogue conversation
+        m_DialogueNPC.AllowInteraction(true);
+
+        // Fill the name field with the NPC's name
+        m_NameField.text = m_DialogueNPC.GetName();
+
+        Debug.Log(">> Starting conversation with: " + m_DialogueNPC.GetName());
+
+        // Populate sentence queue
+        m_DialogueQueue.Clear();
+
+        foreach(string sentence in m_DialogueNPC.GetDialogue().GetSentences())
+        {
+            m_DialogueQueue.Enqueue(sentence);
+        }
+
+        m_DialogueFieldImage.sprite = m_TextBoxNoBerry;
+
+        // Set a random image (Berry or no berry)
+        int random = Random.Range(0, 2);
+
+        if (random == 0)
+        {
+            m_DialogueFieldImage.sprite = m_TextBoxBerry;
+        }
+
+        m_Transparency.DOFade(1, 0.5f);
+
+        dialogueTween = m_DialogueFieldImage.rectTransform.DOMoveY(m_OriginalDialogueFieldVerticalPosition - 60, 0.5f).From().SetEase(Ease.OutBack);
+
+        m_HasDialogueStarted = true;
+
+        ProcessTextField();
+
+    }
+
+    private void EndDialogue()
+    {
+        Debug.Log(">> Ending dialogue");
+
+        dialogueTween.SetLoops(0);
+        dialogueTween.Complete();
+        dialogueTween.Kill();
+
+        m_HasDialogueStarted = false;
+        m_IsProcessingText = false;
+        m_Transparency.DOFade(0, 0.25f);
+
+        EventManager.Invoke(EventName.DialogueEnd);
+
+        TryToAssignQuest();
+    }
+
+    private void TryToAssignQuest()
+    {
+        EventManager.Invoke(EventName.QuestStart);
+        QuestManager.AddNPC(m_DialogueNPC);
+
+        // Quest quest = m_DialogueNPC.GetMostRecentQuest();
+
+        // // Got most recent quest from NPC
+        // if (null != quest)
+        // {
+        //     Debug.Log(">> Assigning quest to player from " + m_DialogueNPC.GetName());
+
+        //     quest.SetState(QuestState.Started);
+
+        //     // QuestManager.AddQuest(quest);
+
+        //     // QuestManager.SetCurrentQuest(quest);
+        // }
+    }
+
+    private void ProcessTextField()
+    {
+        Debug.Log(">> Processing text field");
+
+        // Empty the text field
+        m_TextField.text = "";
+
+        // If there are no more sentences left, end the dialogue
+        if (m_DialogueQueue.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
+
+        // Begin processing the text
+        m_IsProcessingText = true;
+
+        m_CurrentSentence = m_DialogueQueue.Dequeue();
+
+        StartCoroutine(AnimateText(m_CurrentSentence, 0.5f, 0.2f, 0.01f));
+    }
+
+    /// <summary>
+    /// Animates the text in a typewriter effect
+    /// </summary>
+    /// <param name="sentence"></param>
+    /// <param name="initialDelay"></param>
+    /// <param name="escapeCharacterDelay"></param>
+    /// <param name="typingSpeed"></param>
+    /// <returns></returns>
+    private IEnumerator AnimateText(string sentence, float initialDelay, float escapeCharacterDelay, float typingSpeed)
+    {
+        // Hide the cursor
+        m_NextFieldCursor.DOScale(Vector3.zero, 0.1f);
+        cursorTween.SetLoops(0);
+        cursorTween.Complete();
+        cursorTween.Kill();
+
+        yield return new WaitForSeconds(initialDelay);
+
+        string finalText = "";
+
+        for (int i = 0; i < sentence.Length; i++)
+        {
+            if (!m_IsProcessingText)
+            {
+                Debug.Log(">> Skipped text animation");
+                break;
+            }
+
+            finalText += sentence[i];
+
+            m_TextField.text = finalText;
+
+            if (sentence[i] == '\n' || sentence[i] == ',')
+            {
+                yield return new WaitForSeconds(escapeCharacterDelay);
+            }
+            else
+            {
+                yield return new WaitForSeconds(typingSpeed);
+            }
+        }
+
+        Debug.Log(">> Finished animating text - Showing next field cursor");
+        ShowNextFieldCursor(sentence);
+
+    }
+
+    /// <summary>
+    /// Show the next field cursor - Called whenever the text animation finishes
+    /// </summary>
+    private void ShowNextFieldCursor(string currentTextField)
+    {
+        Debug.Log(">> Showing next field cursor");
+
+        m_TextField.text = currentTextField;
+
+        m_NextFieldCursor.localPosition = m_NextFieldCursorOriginalPosition;
+
+        // Show the cursor once the dialogue has finished
+        m_NextFieldCursor.DOScale(Vector3.one * 0.25f, 0.2f).OnComplete(() => { });
+        m_IsProcessingText = false;
+        cursorTween = m_NextFieldCursor.DOLocalMoveY(m_NextFieldCursorOriginalPosition.y - 5, 0.3f).SetAutoKill(false).SetLoops(-1, LoopType.Yoyo);
     }
 
 }

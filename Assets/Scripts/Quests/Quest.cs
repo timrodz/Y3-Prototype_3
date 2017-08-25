@@ -18,7 +18,7 @@ public class Quest
 	[SerializeField] [EnumFlagsAttribute] private ItemHasg m_Item;
 	[SerializeField] private int m_ItemQuantity;
 	[SerializeField] private QuestState m_State;
-	[SerializeField] private Dialogue dialogue;
+	[SerializeField] private Dialogue m_Dialogue;
 	
 	public Quest()
 	{
@@ -55,6 +55,11 @@ public class Quest
 	public QuestState GetState()
 	{
 		return m_State;
+	}
+
+	public Dialogue GetDialogue()
+	{
+		return m_Dialogue;
 	}
 	
 }

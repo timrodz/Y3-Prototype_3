@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
 
-[System.Flags]
 public enum EventName
 {
-    NONE = (1 << 0),
-    OnPlayerTriggerEnter = (1 << 1),
-    OnPlayerTriggerExit = (1 << 2),
-	DialogueRequest = (1 << 3),
-	DialogueStart = (1 << 4),
-	DialogueEnd = (1 << 5),
-	QuestStart = (1 << 6),
-	QuestFail = (1 << 7),
-	QuestComplete = (1 << 8),
-    QuestCheck = (1 << 9),
-    QuestIncomplete = (1 << 10),
-	PlayerJump = (1 << 11),
-    PlayerItemPickup = (1 << 12)
+    NONE,
+    OnPlayerTriggerEnter,
+    OnPlayerTriggerExit,
+	DialogueRequest,
+	DialogueStart,
+	DialogueEnd,
+	QuestStart,
+	QuestFail,
+	QuestComplete,
+    QuestCheck,
+    QuestIncomplete,
+    QuestCheckAll,
+    QuestCompleteAll,
+    QuestFailAll,
+	PlayerJump,
+    PlayerItemPickup
 }
 
 public struct CustomEvent
