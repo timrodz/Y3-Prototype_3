@@ -82,19 +82,19 @@ public class ItemDatabase : MonoBehaviour
 }
 
 [System.Serializable]
-public class Item
+public class Item 
 {
     //LOADED VARIABLES FROM JSON LIST
 
     public int ID;
     public string Title;
     public int Value;
-    public int MaxStack { get; set; }
+    public int MaxStack;
     public bool Edible;
     public string Description;
-    public string spriteName { get; set; }
-    public bool usingSpreadSheet { get; set; }
-    public int sliceIndex { get; set; }
+    public string spriteName;
+    public bool usingSpreadSheet;
+    public int sliceIndex;
 
 
     public int count;

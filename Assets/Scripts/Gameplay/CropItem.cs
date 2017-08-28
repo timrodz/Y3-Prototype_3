@@ -49,7 +49,8 @@ public class CropItem : MonoBehaviour {
     {
         CropMesh.SetActive(false);
         CropHarvested = true;
-        ItemScript.enabled = false;
+        if (ItemScript)
+            ItemScript.enabled = false;
     }
 
     private void RestoreCrop()
@@ -57,6 +58,7 @@ public class CropItem : MonoBehaviour {
         CropMesh.SetActive(true);
         CropHarvested = false;
         m_timer = 0.0f;
-        ItemScript.enabled = true;
+        if (ItemScript)
+            ItemScript.enabled = true;
     }
 }
