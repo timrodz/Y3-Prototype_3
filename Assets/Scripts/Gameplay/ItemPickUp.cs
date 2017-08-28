@@ -31,7 +31,11 @@ public class ItemPickUp : MonoBehaviour {
 
     public void Update()
     {
-    
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            ItemInventory.instance.AddItem(item.ID, item.count);
+            Destroy(gameObject);
+        }
     }
 
     public void OnValidate()
