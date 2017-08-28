@@ -10,6 +10,7 @@ public class ItemInventory : MonoBehaviour {
 
     [HideInInspector]
     private ItemDatabase database;
+    public static ItemInventory instance;
 
     public GameObject inventorySlot;
     public GameObject inventoryItem;
@@ -23,7 +24,6 @@ public class ItemInventory : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        instance = this;
         //inventoryPanel = GameObject.Find("Inventory Panel");
         //slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
         database = ItemDatabase.instance;
@@ -61,6 +61,34 @@ public class ItemInventory : MonoBehaviour {
     public void HasItemRequest(int id)
     {
 
+    }
+
+    public ItemState AddItem(Item item)
+    {
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].ID == item.ID)
+            {
+                items[i].count += item.count;
+                UpdateItemSlot(items[i]);
+                return ItemState.AddCountSuccess;
+            }
+        }
+
+        if (items.Count >= 4)
+        {
+            return ItemState.NoSpace;
+        }
+        else
+        {
+            Item itemToAdd = new Item(item);
+
+            items.Add(itemToAdd);
+            AddItemToFreeSlot(itemToAdd);
+
+            return ItemState.AddSuccess;
+        }
     }
 
     public ItemState AddItem(int id, int countMult = 1)
@@ -132,3 +160,8 @@ public class ItemInventory : MonoBehaviour {
         RemoveFail
     }
 }
+
+        if (instance != null)
+            Destroy(this.gameObject);
+
+        instance = this;

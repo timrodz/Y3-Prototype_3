@@ -13,6 +13,10 @@ public class ItemPickUp : MonoBehaviour {
     [SerializeField]
     private bool m_IsInteractable;
 
+
+    //[Header("EditorVariables")]
+    public bool isPickupInstance = false;
+
     [SerializeField] private Image m_InteractableImage;
     [SerializeField] private TMPro.TextMeshProUGUI text;
 
@@ -31,10 +35,15 @@ public class ItemPickUp : MonoBehaviour {
 
     public void Update()
     {
+        if(!m_PlayerTriggered)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.E))
         {
             ItemInventory.instance.AddItem(item.ID, item.count);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

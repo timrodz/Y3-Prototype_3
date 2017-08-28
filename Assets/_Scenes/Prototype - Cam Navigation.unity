@@ -379,8 +379,28 @@ Prefab:
         type: 2}
       propertyPath: item.Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e6b070860824f3647b9eb2d174fa68fe,
+      objectReference: {fileID: 21300004, guid: e6b070860824f3647b9eb2d174fa68fe,
         type: 3}
+    - target: {fileID: 114544829069145924, guid: 2bc5bf55ffc1f524084f51db58fc824a,
+        type: 2}
+      propertyPath: item.Title
+      value: HoneyPot
+      objectReference: {fileID: 0}
+    - target: {fileID: 114544829069145924, guid: 2bc5bf55ffc1f524084f51db58fc824a,
+        type: 2}
+      propertyPath: item.count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114544829069145924, guid: 2bc5bf55ffc1f524084f51db58fc824a,
+        type: 2}
+      propertyPath: m_IsInteractable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114544829069145924, guid: 2bc5bf55ffc1f524084f51db58fc824a,
+        type: 2}
+      propertyPath: item.ID
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bc5bf55ffc1f524084f51db58fc824a, type: 2}
   m_IsPrefabParent: 0
