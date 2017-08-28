@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerEventHandler : MonoBehaviour
 {
-	private bool m_CanInteract = true;
+    private bool m_CanInteract = true;
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
 #if UNITY_STANDALONE
-        if (m_CanInteract && Input.GetKeyDown(KeyCode.E) )
+        if (m_CanInteract && Input.GetKeyDown(KeyCode.E))
         {
             EventManager.Invoke(EventName.DialogueRequest);
         }
@@ -38,3 +38,5 @@ public class PlayerEventHandler : MonoBehaviour
         EventManager.Invoke(EventName.OnPlayerTriggerExit);
         EventManager.ResetSender();
     }
+
+}
