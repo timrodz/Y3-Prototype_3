@@ -14,6 +14,7 @@ public enum QuestState
 [System.Serializable]
 public class Quest
 {
+	private NPC m_NPC;
 	[SerializeField] private string m_Name;
 	[SerializeField] [EnumFlagsAttribute] private ItemHasg m_Item;
 	[SerializeField] private int m_ItemQuantity;
@@ -22,9 +23,15 @@ public class Quest
 	
 	public Quest()
 	{
+		m_NPC = null;
 		m_Name = "Default quest";
 		m_Item = ItemHasg.None;
 		m_ItemQuantity = 0;
+	}
+	
+	public void SetNPC(NPC npc)
+	{
+		m_NPC = npc;
 	}
 	
 	public void GetInfo()

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Empty class that prevents all colliders sending messages
 public class EventDispatcher : MonoBehaviour {
 
-    public EventName eventName;
 }
 

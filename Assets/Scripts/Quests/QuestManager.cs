@@ -85,7 +85,7 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        m_QuestPanel.DOLocalMoveY(m_QuestPanel.localPosition.y - 5, 0.35f).SetEase(Ease.InOutSine).OnComplete(() =>
+        m_QuestPanel.DOLocalMoveY(m_QuestPanel.localPosition.y - 5, 0.35f).SetEase(Ease.OutBounce).OnComplete(() =>
         {
             m_QuestPanel.DOLocalMoveY(m_QuestPanel.localPosition.y + 5, 0.25f);
         });
@@ -94,12 +94,12 @@ public class QuestManager : MonoBehaviour
     public static void SetCurrentQuest(Quest quest)
     {
         Debug.Log("==== Set current quest ====");
-
+        
         QuestManager.Instance.m_CurrentQuest = quest;
-
+        
         QuestManager.Instance.m_CurrentQuest.GetInfo();
-        QuestManager.Instance.m_QuestTextField.text = QuestManager.Instance.m_CurrentQuest.GetName();
-
+        QuestManager.Instance.m_QuestTextField.text += QuestManager.Instance.m_CurrentQuest.GetName();
+        
         QuestManager.Instance.ShowQuestPanel();
     }
 
@@ -147,7 +147,7 @@ public class QuestManager : MonoBehaviour
             EventManager.SetQuest(QuestManager.Instance.m_QuestList[index]);
             EventManager.Invoke(EventName.QuestComplete);
         }
-
+        
         // Hide the quest panel and empty the quest text 
         // field if there are no more quests
         if (QuestManager.Instance.m_QuestList.Count <= 0)
