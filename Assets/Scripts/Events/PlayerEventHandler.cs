@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerEventHandler : MonoBehaviour
 {
 	private bool m_CanInteract = true;
-
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
@@ -40,3 +39,5 @@ public class PlayerEventHandler : MonoBehaviour
         EventManager.ResetSender();
     }
 }
+        EventManager.Invoke(EventName.OnPlayerTriggerExit);
+        EventManager.ResetSender();

@@ -3,10 +3,6 @@ using System.Collections.Generic; // Dictionary
 using UnityEngine;
 using UnityEngine.Events; // UnityEvents
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 /// <summary>
 /// Manages event handling through UnityEvents
 /// 

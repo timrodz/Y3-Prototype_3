@@ -158,7 +158,7 @@ public class DialogueManager : MonoBehaviour
             EventManager.Invoke(EventName.QuestCheck);
 
             // For now: Directly start the dialogue
-            // EventManager.Invoke(EventName.DialogueStart);
+            EventManager.Invoke(EventName.DialogueStart);
 
             return;
         }

@@ -27,6 +27,7 @@ public class ItemInventory : MonoBehaviour {
             Destroy(this.gameObject);
 
         instance = this;
+
         //inventoryPanel = GameObject.Find("Inventory Panel");
         //slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
         database = ItemDatabase.instance;
@@ -163,3 +164,4 @@ public class ItemInventory : MonoBehaviour {
         RemoveFail
     }
 }
+
