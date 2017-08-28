@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemInventory : MonoBehaviour {
 
-    public static ItemInventory instance;
     //GameObject inventoryPanel;
     //GameObject slotPanel;
 
@@ -23,6 +22,11 @@ public class ItemInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        if (instance != null)
+            Destroy(this.gameObject);
+
+        instance = this;
 
         //inventoryPanel = GameObject.Find("Inventory Panel");
         //slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
@@ -161,7 +165,3 @@ public class ItemInventory : MonoBehaviour {
     }
 }
 
-        if (instance != null)
-            Destroy(this.gameObject);
-
-        instance = this;
