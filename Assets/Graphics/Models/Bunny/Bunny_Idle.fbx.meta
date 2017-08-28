@@ -1,0 +1,269 @@
+fileFormatVersion: 2
+guid: da5695ee27f644c3e9caf974c625c700
+timeCreated: 1503888521
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bunny:Bunny
+    100002: Bunny:Bunny1
+    100004: Bunny:Bunny10
+    100006: Bunny:Bunny11
+    100008: Bunny:Bunny12
+    100010: Bunny:Bunny13
+    100012: Bunny:Bunny14
+    100014: Bunny:Bunny17
+    100016: Bunny:Bunny18
+    100018: Bunny:Bunny19
+    100020: Bunny:Bunny2
+    100022: Bunny:Bunny20
+    100024: Bunny:Bunny21
+    100026: Bunny:Bunny22
+    100028: Bunny:Bunny26
+    100030: Bunny:Bunny27
+    100032: Bunny:Bunny28
+    100034: Bunny:Bunny29
+    100036: Bunny:Bunny3
+    100038: Bunny:Bunny30
+    100040: Bunny:Bunny33
+    100042: Bunny:Bunny34
+    100044: Bunny:Bunny35
+    100046: Bunny:Bunny36
+    100048: Bunny:Bunny37
+    100050: Bunny:Bunny4
+    100052: Bunny:Bunny41
+    100054: Bunny:Bunny42
+    100056: Bunny:Bunny43
+    100058: Bunny:Bunny45
+    100060: Bunny:Bunny46
+    100062: Bunny:Bunny47
+    100064: Bunny:Bunny49
+    100066: Bunny:Bunny5
+    100068: Bunny:Bunny6
+    100070: Bunny:Bunny7
+    100072: Bunny:Bunny8
+    100074: Bunny:Bunny9
+    100076: Bunny:Skeleton_GRP
+    100078: //RootNode
+    400000: Bunny:Bunny
+    400002: Bunny:Bunny1
+    400004: Bunny:Bunny10
+    400006: Bunny:Bunny11
+    400008: Bunny:Bunny12
+    400010: Bunny:Bunny13
+    400012: Bunny:Bunny14
+    400014: Bunny:Bunny17
+    400016: Bunny:Bunny18
+    400018: Bunny:Bunny19
+    400020: Bunny:Bunny2
+    400022: Bunny:Bunny20
+    400024: Bunny:Bunny21
+    400026: Bunny:Bunny22
+    400028: Bunny:Bunny26
+    400030: Bunny:Bunny27
+    400032: Bunny:Bunny28
+    400034: Bunny:Bunny29
+    400036: Bunny:Bunny3
+    400038: Bunny:Bunny30
+    400040: Bunny:Bunny33
+    400042: Bunny:Bunny34
+    400044: Bunny:Bunny35
+    400046: Bunny:Bunny36
+    400048: Bunny:Bunny37
+    400050: Bunny:Bunny4
+    400052: Bunny:Bunny41
+    400054: Bunny:Bunny42
+    400056: Bunny:Bunny43
+    400058: Bunny:Bunny45
+    400060: Bunny:Bunny46
+    400062: Bunny:Bunny47
+    400064: Bunny:Bunny49
+    400066: Bunny:Bunny5
+    400068: Bunny:Bunny6
+    400070: Bunny:Bunny7
+    400072: Bunny:Bunny8
+    400074: Bunny:Bunny9
+    400076: Bunny:Skeleton_GRP
+    400078: //RootNode
+    4300000: Bunny:Bunny
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Bunny:Bunny
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bunny:Bunny
+        weight: 1
+      - path: Bunny:Skeleton_GRP
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9/Bunny:Bunny10
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9/Bunny:Bunny10/Bunny:Bunny11
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9/Bunny:Bunny10/Bunny:Bunny11/Bunny:Bunny12
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9/Bunny:Bunny10/Bunny:Bunny11/Bunny:Bunny12/Bunny:Bunny13
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny9/Bunny:Bunny10/Bunny:Bunny11/Bunny:Bunny12/Bunny:Bunny13/Bunny:Bunny14
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17/Bunny:Bunny18
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17/Bunny:Bunny18/Bunny:Bunny19
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17/Bunny:Bunny18/Bunny:Bunny19/Bunny:Bunny20
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17/Bunny:Bunny18/Bunny:Bunny19/Bunny:Bunny20/Bunny:Bunny21
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny6/Bunny:Bunny7/Bunny:Bunny8/Bunny:Bunny17/Bunny:Bunny18/Bunny:Bunny19/Bunny:Bunny20/Bunny:Bunny21/Bunny:Bunny22
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny26
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny26/Bunny:Bunny27
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny26/Bunny:Bunny27/Bunny:Bunny28
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny26/Bunny:Bunny27/Bunny:Bunny28/Bunny:Bunny29
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny26/Bunny:Bunny27/Bunny:Bunny28/Bunny:Bunny29/Bunny:Bunny30
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny33
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny33/Bunny:Bunny34
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny33/Bunny:Bunny34/Bunny:Bunny35
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny33/Bunny:Bunny34/Bunny:Bunny35/Bunny:Bunny36
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny2/Bunny:Bunny3/Bunny:Bunny4/Bunny:Bunny5/Bunny:Bunny33/Bunny:Bunny34/Bunny:Bunny35/Bunny:Bunny36/Bunny:Bunny37
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny41
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny41/Bunny:Bunny42
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny41/Bunny:Bunny42/Bunny:Bunny43
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny45
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny45/Bunny:Bunny46
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny45/Bunny:Bunny46/Bunny:Bunny47
+        weight: 1
+      - path: Bunny:Skeleton_GRP/Bunny:Bunny1/Bunny:Bunny49
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 50
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 0
+    tangentImportMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
