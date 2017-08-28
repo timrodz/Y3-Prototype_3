@@ -8,19 +8,18 @@ using UnityEditor;
 public class ItemPickupEditor : Editor {
 
     int selected = 0;
+    int index = 0;
     int prev = -1;
     bool Edited = false;
+
+    int itemID;
+    int itemName;
 
     public override void OnInspectorGUI()
     {
         ItemPickUp pickup = (ItemPickUp)target;
 
         string[] options;
-        if (DrawDefaultInspector())
-        {
-   
-        }
-
         ItemDatabase database = ItemDatabase.instance;
         options = new string[database.database.Count];
         for (int i = 0; i < options.Length; i++)
@@ -30,13 +29,18 @@ public class ItemPickupEditor : Editor {
 
         selected = EditorGUILayout.Popup("Item Type", selected, options);
 
-        if(!pickup.isPickupInstance)
+        if (!pickup.isPickupInstance)
         {
             if (selected != prev)
             {
+                itemName = selected;
                 prev = selected;
                 pickup.item = new Item(database.FetchItemByID(selected));
             }
+        }
+        if (DrawDefaultInspector())
+        {
+   
         }
     }
 }

@@ -2,26 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 using DG.Tweening;
 
+[RequireComponent(typeof(Collider))]
 public class ItemPickUp : MonoBehaviour {
 
+
+    [Header("Item from Database")]
     public Item item;
 
     [Header("Variables")]
     [SerializeField]
     private bool m_IsInteractable;
+    [SerializeField]
+    private bool m_DoesDestroySelf;
 
-
-    //[Header("EditorVariables")]
     public bool isPickupInstance = false;
 
     [SerializeField] private Image m_InteractableImage;
     [SerializeField] private TMPro.TextMeshProUGUI text;
 
-    private Vector3 m_InteractableImageScale;
+    [Header("Additional PickUp Events")]
+    [SerializeField]
+    public UnityEvent Events;
+    
 
+    private Vector3 m_InteractableImageScale;
     private bool m_CanInteract;
     private bool m_PlayerTriggered = false;
     Tween interactableImageTween;
@@ -42,8 +50,16 @@ public class ItemPickUp : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.E))
         {
-            ItemInventory.instance.AddItem(item.ID, item.count);
-            Destroy(this.gameObject);
+            ItemInventory.instance.AddItem(item);
+
+            if(Events != null)
+            {
+                Events.Invoke();
+            }
+
+            if (m_DoesDestroySelf)
+                Destroy(this.gameObject);
+
         }
     }
 

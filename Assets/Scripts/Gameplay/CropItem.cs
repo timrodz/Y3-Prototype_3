@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CropItem : MonoBehaviour {
+
+    [Header("Variables")]
+    [SerializeField]
+    private GameObject CropMesh;
+    [SerializeField]
+    private float RestoreTimer = 60.0f;
+    [SerializeField]
+    private bool CropHarvested = false;
+    [SerializeField]
+    private ItemPickUp ItemScript;
+
+
+    private float m_timer;
+
+    private void Awake()
+    {
+        if(CropMesh)
+        {
+            if(CropHarvested)
+            {
+                CropMesh.SetActive(false);
+            }
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if(CropHarvested)
+        {
+            m_timer += Time.deltaTime;
+            if(m_timer >= RestoreTimer)
+            {
+                RestoreCrop();
+            }
+        }
+	}
+
+    public void HarvestCrop()
+    {
+        CropMesh.SetActive(false);
+        CropHarvested = true;
+        ItemScript.enabled = false;
+    }
+
+    private void RestoreCrop()
+    {
+        CropMesh.SetActive(true);
+        CropHarvested = false;
+        m_timer = 0.0f;
+        ItemScript.enabled = true;
+    }
+}
