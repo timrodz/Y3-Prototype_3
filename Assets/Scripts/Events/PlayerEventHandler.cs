@@ -38,6 +38,3 @@ public class PlayerEventHandler : MonoBehaviour
         EventManager.Invoke(EventName.OnPlayerTriggerExit);
         EventManager.ResetSender();
     }
-}
-        EventManager.Invoke(EventName.OnPlayerTriggerExit);
-        EventManager.ResetSender();
