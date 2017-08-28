@@ -9,44 +9,44 @@ public class NPC
     [SerializeField] private bool m_IsRecruited;
     [SerializeField] private bool m_IsInteracting;
     [SerializeField] private GameObject gameObject;
-    
+
     [SerializeField] private Dialogue m_Dialogue;
-    
+
     // [SerializeField] private List<Quest> m_Quests = new List<Quest>();
     [SerializeField] private Quest m_Quest;
-    
+
     public NPC()
     {
         m_Name = null;
         gameObject = null;
     }
-    
+
     public NPC(string _name, GameObject _object)
     {
         m_Name = _name;
         gameObject = _object;
     }
-    
+
     public string GetName()
     {
         return m_Name;
     }
-    
+
     public void SetObject(GameObject _object)
     {
         gameObject = _object;
     }
-    
+
     public GameObject GetObject()
     {
         return gameObject;
     }
-    
+
     public void AllowInteraction(bool _isInteracting)
     {
         m_IsInteracting = _isInteracting;
     }
-    
+
     public bool IsInteracting()
     {
         return m_IsInteracting;
@@ -61,26 +61,23 @@ public class NPC
     {
         return m_IsRecruited;
     }
-    
+
     public void SetDialogue(Dialogue dialogue)
     {
         m_Dialogue = dialogue;
     }
-    
+
     public Dialogue GetDialogue()
     {
         return m_Dialogue;
     }
-    
+
     public void SetQuests()
-    {        
-        foreach(Quest _quest in m_Quests)
-        {
-            _quest.GetInfo();
-            _quest.SetNPC(this);
-        }
+    {
+        m_Quest.GetInfo();
+        m_Quest.SetNPC(this);
     }
-    
+
     public Quest GetMostRecentQuest()
     {
         // if (m_Quests.Count > 0)
