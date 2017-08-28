@@ -1,0 +1,310 @@
+fileFormatVersion: 2
+guid: 5511c1df10c131047bb61416fee0c0bc
+timeCreated: 1503894419
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Racoon:Racoon
+    100004: Racoon:Racoon1
+    100006: Racoon:Racoon10
+    100008: Racoon:Racoon11
+    100010: Racoon:Racoon14
+    100012: Racoon:Racoon15
+    100014: Racoon:Racoon16
+    100016: Racoon:Racoon2
+    100018: Racoon:Racoon20
+    100020: Racoon:Racoon21
+    100022: Racoon:Racoon22
+    100024: Racoon:Racoon23
+    100026: Racoon:Racoon24
+    100028: Racoon:Racoon27
+    100030: Racoon:Racoon28
+    100032: Racoon:Racoon29
+    100034: Racoon:Racoon3
+    100036: Racoon:Racoon30
+    100038: Racoon:Racoon31
+    100040: Racoon:Racoon35
+    100042: Racoon:Racoon36
+    100044: Racoon:Racoon37
+    100046: Racoon:Racoon39
+    100048: Racoon:Racoon4
+    100050: Racoon:Racoon40
+    100052: Racoon:Racoon41
+    100054: Racoon:Racoon43
+    100056: Racoon:Racoon44
+    100058: Racoon:Racoon45
+    100060: Racoon:Racoon46
+    100062: Racoon:Racoon47
+    100064: Racoon:Racoon48
+    100066: Racoon:Racoon49
+    100068: Racoon:Racoon5
+    100070: Racoon:Racoon6
+    100072: Racoon:Racoon7
+    100074: Racoon:Racoon8
+    100076: Racoon:Racoon9
+    100078: Racoon:Skeleton_GRP
+    400000: //RootNode
+    400002: Racoon:Racoon
+    400004: Racoon:Racoon1
+    400006: Racoon:Racoon10
+    400008: Racoon:Racoon11
+    400010: Racoon:Racoon14
+    400012: Racoon:Racoon15
+    400014: Racoon:Racoon16
+    400016: Racoon:Racoon2
+    400018: Racoon:Racoon20
+    400020: Racoon:Racoon21
+    400022: Racoon:Racoon22
+    400024: Racoon:Racoon23
+    400026: Racoon:Racoon24
+    400028: Racoon:Racoon27
+    400030: Racoon:Racoon28
+    400032: Racoon:Racoon29
+    400034: Racoon:Racoon3
+    400036: Racoon:Racoon30
+    400038: Racoon:Racoon31
+    400040: Racoon:Racoon35
+    400042: Racoon:Racoon36
+    400044: Racoon:Racoon37
+    400046: Racoon:Racoon39
+    400048: Racoon:Racoon4
+    400050: Racoon:Racoon40
+    400052: Racoon:Racoon41
+    400054: Racoon:Racoon43
+    400056: Racoon:Racoon44
+    400058: Racoon:Racoon45
+    400060: Racoon:Racoon46
+    400062: Racoon:Racoon47
+    400064: Racoon:Racoon48
+    400066: Racoon:Racoon49
+    400068: Racoon:Racoon5
+    400070: Racoon:Racoon6
+    400072: Racoon:Racoon7
+    400074: Racoon:Racoon8
+    400076: Racoon:Racoon9
+    400078: Racoon:Skeleton_GRP
+    4300000: Racoon:Racoon
+    7400000: Take 001
+    7400002: Take 001 (1)
+    7400004: Take 001 (2)
+    7400006: Take 001 (3)
+    7400008: Take 001 (4)
+    9500000: //RootNode
+    13700000: Racoon:Racoon
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Take 001 (1)
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 130
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Take 001 (2)
+      takeName: Take 001
+      firstFrame: 140
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Take 001 (3)
+      takeName: Take 001
+      firstFrame: 210
+      lastFrame: 260
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Take 001 (4)
+      takeName: Take 001
+      firstFrame: 270
+      lastFrame: 300
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

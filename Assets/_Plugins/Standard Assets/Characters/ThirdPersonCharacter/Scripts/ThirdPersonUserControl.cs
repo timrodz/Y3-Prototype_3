@@ -56,6 +56,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                m_Jump = Input.GetKeyDown(KeyCode.Space);
             }
         }
 
@@ -81,29 +82,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 // we use world-relative directions in the case of no main camera
                 m_Move = v * Vector3.forward + h * Vector3.right;
             }
-            
-#if !MOBILE_INPUT
+
+//#if !MOBILE_INPUT
+            bool sprint = false;
             // walk speed multiplier
-            if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
-#endif
+            if (Input.GetKey(KeyCode.LeftShift)) sprint = true;
+//#endif
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
+            m_Character.Move(m_Move, false, sprint, m_Jump);
             m_Jump = false;
         }
 
         private void AllowMovement()
         {
-            Debug.Log("Allowing player movement");
+            //Debug.Log("Allowing player movement");
             m_CanMove = true;
         }
 
         private void PreventMovement()
         {
-            Debug.Log("Preventing player movement");
+            //Debug.Log("Preventing player movement");
             m_CanMove = false;
             m_Move = Vector3.zero;
-            m_Character.Move(Vector3.zero, false, false);
+            m_Character.Move(Vector3.zero, false, false, false);
         }
 
     }
