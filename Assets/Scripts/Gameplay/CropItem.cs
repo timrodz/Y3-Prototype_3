@@ -14,6 +14,8 @@ public class CropItem : MonoBehaviour {
     [SerializeField]
     private ItemPickUp ItemScript;
 
+    private AudioManager audioManager;
+
 
     private float m_timer;
 
@@ -30,8 +32,9 @@ public class CropItem : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -47,6 +50,8 @@ public class CropItem : MonoBehaviour {
 
     public void HarvestCrop()
     {
+        audioManager.Play("Carrot_Harvest");
+
         CropMesh.SetActive(false);
         CropHarvested = true;
         if (ItemScript)

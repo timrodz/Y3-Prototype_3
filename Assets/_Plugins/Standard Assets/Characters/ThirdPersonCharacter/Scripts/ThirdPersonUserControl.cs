@@ -14,6 +14,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool m_Jump; // the world-relative desired move direction, calculated from the camForward and user input.
 
         private bool m_CanMove = true;
+        private bool m_IsMoving = false;
+
+        private AudioSource m_AudioSource;
+        private AudioManager m_audioManager;
+       
 
         private void Start()
         {
@@ -31,6 +36,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<ThirdPersonCharacter>();
+
+            m_AudioSource = GetComponent<AudioSource>();
+            m_audioManager = FindObjectOfType<AudioManager>();
         }
 
         /// <summary>
@@ -58,6 +66,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
                 m_Jump = Input.GetKeyDown(KeyCode.Space);
             }
+
+            if (m_IsMoving && !m_AudioSource.isPlaying)
+            {
+                m_AudioSource.Play();
+            }
+
+            //if (m_IsMoving && !m_audioManager.IsPlaying("Footstep"))
+            //{
+            //    m_audioManager.Play("Footstep");
+            //}
         }
 
         // Fixed update is called in sync with physics
@@ -69,6 +87,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
+
+            if (h == 0 && v == 0)
+            {
+                m_IsMoving = false;
+            }
+            else
+            {
+                m_IsMoving = true;
+            }
 
             // calculate move direction to pass to character
             if (m_Cam != null)

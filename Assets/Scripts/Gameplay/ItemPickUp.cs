@@ -52,7 +52,7 @@ public class ItemPickUp : MonoBehaviour {
         {
             ItemInventory.instance.AddItem(item);
 
-            if(Events != null)
+            if (Events != null)
             {
                 Events.Invoke();
             }

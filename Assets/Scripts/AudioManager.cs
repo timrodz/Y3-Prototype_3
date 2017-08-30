@@ -16,7 +16,6 @@ public class AudioManager : MonoBehaviourSingletonPersistent<AudioManager>
         // Add the audio sources
         foreach(Sound s in sounds)
         {
-
             s.source = gameObject.AddComponent<AudioSource>();
 
             s.source.clip = s.clip;
@@ -49,11 +48,26 @@ public class AudioManager : MonoBehaviourSingletonPersistent<AudioManager>
 
         if (s == null)
         {
+            Debug.Log("Sound equals null!!");
             return;
         }
 
         s.source.Play();
 
+        Debug.Log("Played: " + s.name);
+
+    }
+
+    public bool IsPlaying(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s.source.isPlaying)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }
