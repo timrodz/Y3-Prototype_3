@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18022054, g: 0.22564961, b: 0.30683383, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1052,8 +1052,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 210896015}
-  m_LocalRotation: {x: -0.24411531, y: 0.26719204, z: 0.07016641, w: 0.9295659}
-  m_LocalPosition: {x: 68.67156, y: -9.1177635, z: 18.686852}
+  m_LocalRotation: {x: -0.15135163, y: 0.0000000625955, z: 0.000000009584344, w: 0.98848}
+  m_LocalPosition: {x: 63.7, y: -7.59, z: -3.488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1354,7 +1354,7 @@ Prefab:
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 76
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
@@ -1494,13 +1494,14 @@ Prefab:
         type: 2}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975,
+      objectReference: {fileID: 11400000, guid: 75334e24c5e7d1e4a97fec674be256a5,
         type: 2}
     - target: {fileID: 114613397583113510, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+      objectReference: {fileID: 21048018142333042, guid: 75334e24c5e7d1e4a97fec674be256a5,
+        type: 2}
     - target: {fileID: 224517827587790344, guid: cc991ab9394b1485db73dbec32b12d5e,
         type: 2}
       propertyPath: m_LocalScale.x
@@ -4206,13 +4207,13 @@ MonoBehaviour:
   - name: Footstep
     clip: {fileID: 8300000, guid: ac3384b75bdfdbe48a92019c86a966f0, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Carrot_Harvest
     clip: {fileID: 8300000, guid: 33e4cb6a7436c284397767541127a6eb, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &986199117
@@ -6784,8 +6785,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1932782758}
-  m_LocalRotation: {x: -0.045305673, y: 0.0060288203, z: 0.00027508131, w: 0.99895495}
-  m_LocalPosition: {x: 65.15374, y: -6.0140953, z: 2.876873}
+  m_LocalRotation: {x: 0.087172285, y: 0.89959055, z: 0.21045254, w: -0.37262255}
+  m_LocalPosition: {x: 0.52245533, y: 0.30497247, z: 4.5241337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
