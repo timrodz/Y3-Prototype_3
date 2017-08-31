@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/Menu.unity
     guid: b2d627132f64b77468503432d3366100
   - enabled: 1
+    path: Assets/_Scenes/About.unity
+    guid: b251b09f753519747abec4420a5ade56
+  - enabled: 1
     path: Assets/_Scenes/Mitch - Terrain.unity
     guid: 50ada9f12e98c2240a7c350b846ce00b
