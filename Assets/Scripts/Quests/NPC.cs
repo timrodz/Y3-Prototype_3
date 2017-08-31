@@ -13,6 +13,7 @@ public class NPC
     [SerializeField] private Dialogue m_Dialogue;
 
     // [SerializeField] private List<Quest> m_Quests = new List<Quest>();
+    [SerializeField] private bool m_AssignsQuest;
     [SerializeField] private Quest m_Quest;
 
     public NPC()
@@ -75,7 +76,17 @@ public class NPC
     public void SetQuests()
     {
         m_Quest.GetInfo();
-        m_Quest.SetNPC(this);
+        // m_Quest.SetNPC(this);
+    }
+
+    public void DisableQuest()
+    {
+        m_AssignsQuest = false;
+    }
+
+    public bool CanAssignQuest()
+    {
+        return m_AssignsQuest;
     }
 
     public Quest GetMostRecentQuest()

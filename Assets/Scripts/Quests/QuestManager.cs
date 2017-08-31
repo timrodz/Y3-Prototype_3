@@ -57,7 +57,7 @@ public class QuestManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListening(EventName.PlayerJump, RespondToPlayerJump);
-        EventManager.StartListening(EventName.QuestCheck, CompleteCurrentQuest);
+        EventManager.StartListening(EventName.QuestComplete, CompleteCurrentQuest);
         EventManager.StartListening(EventName.QuestCheckAll, CheckAllQuests);
         EventManager.StartListening(EventName.QuestCompleteAll, CompleteAllQuests);
         EventManager.StartListening(EventName.QuestFailAll, FailAllQuests);
@@ -69,7 +69,7 @@ public class QuestManager : MonoBehaviour
     void OnDisable()
     {
         EventManager.StopListening(EventName.PlayerJump, RespondToPlayerJump);
-        EventManager.StopListening(EventName.QuestCheck, CompleteCurrentQuest);
+        EventManager.StopListening(EventName.QuestComplete, CompleteCurrentQuest);
         EventManager.StopListening(EventName.QuestCheckAll, CheckAllQuests);
         EventManager.StopListening(EventName.QuestCompleteAll, CompleteAllQuests);
         EventManager.StopListening(EventName.QuestFailAll, FailAllQuests);
@@ -109,7 +109,7 @@ public class QuestManager : MonoBehaviour
         QuestManager.Instance.m_CurrentQuest = quest;
         
         QuestManager.Instance.m_CurrentQuest.GetInfo();
-        QuestManager.Instance.m_QuestTextField.text += QuestManager.Instance.m_CurrentQuest.GetName();
+        QuestManager.Instance.m_QuestTextField.text = QuestManager.Instance.m_CurrentQuest.GetName();
         
         QuestManager.Instance.ShowQuestPanel();
     }
@@ -134,7 +134,12 @@ public class QuestManager : MonoBehaviour
             Debug.Log(">> " + npc.GetName());
         }
 
+        index = QuestManager.Instance.m_NPCList.IndexOf(npc);
+
+        QuestManager.SetCurrentQuest(QuestManager.Instance.m_NPCList[index].GetMostRecentQuest());
+        
         QuestManager.AddQuest(QuestManager.Instance.m_NPCList[index].GetMostRecentQuest());
+
     }
 
     public static QuestState CheckQuest(Quest quest)
@@ -180,6 +185,7 @@ public class QuestManager : MonoBehaviour
     public static void CompleteQuest(Quest quest)
     {
         int index = QuestManager.Instance.m_QuestList.IndexOf(quest);
+        
         if (index != -1)
         {
             Debug.Log("==== Completed quest ====");
@@ -188,7 +194,7 @@ public class QuestManager : MonoBehaviour
 
             quest.GetInfo();
 
-            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+            // EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
 
             EventManager.Invoke(EventName.QuestComplete);
 
@@ -204,6 +210,7 @@ public class QuestManager : MonoBehaviour
     {
         int index = QuestManager.Instance.m_QuestList.IndexOf(QuestManager.Instance.m_CurrentQuest);
 
+        Debug.Log("-- INDEX: " + index);
         if (index != -1)
         {
             Debug.Log("==== Completed current quest ====");
@@ -212,9 +219,9 @@ public class QuestManager : MonoBehaviour
 
             QuestManager.Instance.m_CurrentQuest.GetInfo();
 
-            EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
+            // EventManager.SetCurrentQuest(QuestManager.Instance.m_QuestList[index]);
 
-            EventManager.Invoke(EventName.QuestComplete);
+            // EventManager.Invoke(EventName.QuestComplete);
 
             QuestManager.Instance.m_CompletedQuestList.Add(QuestManager.Instance.m_QuestList[index]);
 
@@ -280,11 +287,22 @@ public class QuestManager : MonoBehaviour
 
     private static void DeterminePanelVisibility()
     {
+        Debug.Log("Determining quest panel visibility");
         if (QuestManager.Instance.m_QuestList.Count <= 0)
         {
             Debug.Log(">> Hiding quest panel - No more active quests");
             QuestManager.Instance.m_Transparency.DOFade(0, 0.2f);
+        }else
+        {
+            Debug.Log(">> Showing quest panel");
+            QuestManager.Instance.m_Transparency.DOFade(1, 0.2f);
+            QuestManager.Instance.m_QuestTextField.text = QuestManager.Instance.m_CurrentQuest.GetName();
         }
+    }
+
+    public static List<Quest> GetQuestList()
+    {
+        return QuestManager.Instance.m_QuestList;
     }
 
 }

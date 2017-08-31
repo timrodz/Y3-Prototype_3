@@ -55,6 +55,7 @@ public class DialogueManager : MonoBehaviour
     {
         EventManager.StartListening(EventName.DialogueRequest, ProcessDialogue);
         EventManager.StartListening(EventName.DialogueStart, StartDialogue);
+        EventManager.StartListening(EventName.QuestComplete, UpdateNPCDialogue);
     }
 
     /// <summary>
@@ -64,6 +65,7 @@ public class DialogueManager : MonoBehaviour
     {
         EventManager.StopListening(EventName.DialogueRequest, ProcessDialogue);
         EventManager.StopListening(EventName.DialogueStart, StartDialogue);
+        EventManager.StopListening(EventName.QuestComplete, UpdateNPCDialogue);
     }
 
     /// <summary>
@@ -125,6 +127,14 @@ public class DialogueManager : MonoBehaviour
         return npc;
     }
 
+    private void UpdateNPCDialogue()
+    {
+        Debug.Log("Updating NPC Dialogue");
+        m_DialogueNPC.SetDialogue(m_DialogueNPC.GetMostRecentQuest().GetDialogue());
+        m_DialogueNPC.DisableQuest();
+        EventManager.Invoke(EventName.DialogueStart);
+    }
+
     private void ProcessDialogue()
     {
         Debug.Log("==== Processing Dialogue ====");
@@ -158,7 +168,7 @@ public class DialogueManager : MonoBehaviour
             EventManager.Invoke(EventName.QuestCheck);
 
             // For now: Directly start the dialogue
-            EventManager.Invoke(EventName.DialogueStart);
+            // EventManager.Invoke(EventName.DialogueStart);
 
             return;
         }
@@ -229,8 +239,11 @@ public class DialogueManager : MonoBehaviour
 
     private void TryToAssignQuest()
     {
-        EventManager.Invoke(EventName.QuestStart);
-        QuestManager.AddNPC(m_DialogueNPC);
+        if (m_DialogueNPC.CanAssignQuest())
+        {
+            EventManager.Invoke(EventName.QuestStart);
+            QuestManager.AddNPC(m_DialogueNPC);
+        }
 
         // Quest quest = m_DialogueNPC.GetMostRecentQuest();
 

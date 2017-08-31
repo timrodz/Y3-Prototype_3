@@ -17,21 +17,21 @@ public class PlayerInventory : MonoBehaviour {
 		
 	}
 
-    public void PickUpItem (ItemHasg item)
+    public void PickUpItem (ItemType item)
     {
         switch (item)
         {
-            case ItemHasg.None:
+            case ItemType.None:
                 break;
 
-            case ItemHasg.Berry:
+            case ItemType.Berry:
 
                 berryCount++;
                 print("Number of berries " + berryCount);
 
                 break;
 
-            case ItemHasg.Wood:
+            case ItemType.Wood:
 
                 woodCount++;
                 print("Number of wood " + woodCount);
